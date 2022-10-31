@@ -1,9 +1,9 @@
 package bitirme.odevi.ikys.bussiness.abstracts;
 
-import bitirme.odevi.ikys.entitites.concretes.Diller;
+import bitirme.odevi.ikys.entitites.concretes.Dil;
 
 import java.util.List;
 
 public interface IDillerService  {
-    List<Diller> getDiller();
+    List<Dil> getDiller();
 }

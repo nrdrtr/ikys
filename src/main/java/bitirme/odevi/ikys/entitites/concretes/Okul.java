@@ -11,21 +11,23 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "is")
+@Table(name = "okullar")
 @Getter
 @Setter
-public class Is {
+public class Okul {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "is_id")
-    private int is_id;
+    @Column(name = "okul_id")
+    private int okulId;
 
+    @Column(name = "okul_adi")
+    private String okulAdi;
 
-    @Column(name = "is_adi")
-    private String is_adi;
+    @ManyToOne()
+    private Bolum bolum;
 
-    @OneToMany(mappedBy = "is")
-    private List<IsPozisyonu> isPozisyonu;
+    @OneToMany(mappedBy = "okul")
+    private List<Egitim> egitim;
 
 }

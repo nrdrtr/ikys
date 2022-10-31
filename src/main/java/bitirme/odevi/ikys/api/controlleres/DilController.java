@@ -1,7 +1,7 @@
 package bitirme.odevi.ikys.api.controlleres;
 
 import bitirme.odevi.ikys.bussiness.abstracts.IDillerService;
-import bitirme.odevi.ikys.entitites.concretes.Diller;
+import bitirme.odevi.ikys.entitites.concretes.Dil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ public class DilController {
     }
 
     @GetMapping("/getall")
-    public List<Diller> getDiller(){
+    public List<Dil> getDiller(){
 
         return this.dillerService.getDiller();
     }

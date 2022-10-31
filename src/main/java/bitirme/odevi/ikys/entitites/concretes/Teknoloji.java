@@ -10,25 +10,22 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "is_arayan_dilleri")
+@Table(name = "teknolojiler")
 @Getter
 @Setter
-public class IsArayanDilleri {
-
-
+public class Teknoloji {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int  id;
+    private int id;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "language_id")
-    private Dil dil;
-    @ManyToOne(cascade = CascadeType.DETACH)
+
+    @ManyToOne()
     @JoinColumn(name = "ozgecmis_id",referencedColumnName = "id")
     private Ozgecmis ozgecmis;
 
 
-
+    @Column(name = "teknolojiler")
+    private String teknolojiler;
 
 }

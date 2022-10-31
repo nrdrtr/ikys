@@ -10,25 +10,26 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "is_arayan_dilleri")
+@Table(name = "is_pozisyonları")
 @Getter
 @Setter
-public class IsArayanDilleri {
+public class IsPozisyonu {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int  id;
+    private int id;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "language_id")
-    private Dil dil;
-    @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "ozgecmis_id",referencedColumnName = "id")
-    private Ozgecmis ozgecmis;
+    @Column(name = "is_ismi")
+    private String isIsmi;
 
 
+    @ManyToOne
+    @JoinColumn(name = "is_id")
+    private Is is;
 
 
+    @OneToOne
+    private IsIlani isIlani;
 }
