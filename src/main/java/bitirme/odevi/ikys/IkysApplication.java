@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Component
 @Configuration
 @SpringBootApplication
-public class IkysApplication {//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
+public class IkysApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(IkysApplication.class, args);
