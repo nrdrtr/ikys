@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IsArayanDao extends JpaRepository<IsArayan,Integer>     {
 
+    IsArayan getIsArayanById(int id);
 
 
 }

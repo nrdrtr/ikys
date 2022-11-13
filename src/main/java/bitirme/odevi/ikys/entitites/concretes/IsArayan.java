@@ -1,5 +1,6 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,9 +17,8 @@ import java.util.List;
 @Getter
 @Setter
 @PrimaryKeyJoinColumn(name = "kullanıcı_id", referencedColumnName = "kullanıcı_id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmis", "favori"})
 public class IsArayan extends Kullanıcı {
-
-
 
     @Column(name = "adi")
     private String adi;

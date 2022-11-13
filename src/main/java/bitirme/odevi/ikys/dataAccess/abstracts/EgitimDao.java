@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EgitimDao extends JpaRepository<Egitim,Integer> {
 
+
+
 }
 
 

@@ -24,8 +24,6 @@ public class Dil {
     @Column(name = "dil_seviyesi")
     private String dilSeviye;
 
-
-
     @OneToMany(mappedBy = "dil", cascade = CascadeType.DETACH)
     private List<IsArayanDilleri> isArayanDilleri;
 
