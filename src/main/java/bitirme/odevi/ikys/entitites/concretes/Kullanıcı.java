@@ -3,29 +3,36 @@ package bitirme.odevi.ikys.entitites.concretes;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
+@Data
 @Entity
-@NoArgsConstructor
+@Table(name = "kullanicilar", uniqueConstraints = {@UniqueConstraint(columnNames = {"e_posta"})})
 @AllArgsConstructor
-@Table(name = "kullanıcılar")
-@Getter
-@Setter
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Kullanıcı {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "kullanıcı_id",nullable = false )
+    @Column(name = "id")
     @NotNull
-    private int id;
+     private int id;
 
-    @Column(name = "email")
-    private String email;
+    @NotNull
+    @Column(name = "e_posta")
+    private String  ePosta;
 
-    @Column(name = "şifre")
-    private String sifre;
+    @NotNull
+    @Column(name = "sifre")
+     private String sifre;
+
+    @NotNull
+    @Column(name = "sifre_tekrari")
+     private String sifreTekrari;
+
+
 }

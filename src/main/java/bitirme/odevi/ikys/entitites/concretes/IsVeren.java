@@ -1,44 +1,46 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+@EqualsAndHashCode(callSuper = false)
+@Data
 @Entity
-@Table(name = "isverenler")
-@PrimaryKeyJoinColumn(name = "kullanıcı_id", referencedColumnName = "kullanıcı_id")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmiş", "isIlani"})
-
+@Table(name = "isverenler", uniqueConstraints = {@UniqueConstraint(columnNames = {"sirket_adi"})})
+@AllArgsConstructor
+@NoArgsConstructor
+@PrimaryKeyJoinColumn(name = "kullanici_id", referencedColumnName = "id")
 public class IsVeren extends Kullanıcı {
 
-
-
     @Column(name = "sirket_adi")
-    private String sirketAdi;
-    @Column(name = "web_sitesi")
-    private String webSite;
+    @NotNull
+    private String  sirketAdi;
+
+    @Column(name = "website")
+    @NotNull
+    private String website;
+
     @Column(name = "telefon_numarasi")
-    private String telefonNumarasi;
+    @NotNull
+    private String  telefonNumarasi;
+
     @Column(name = "resim_url")
-    private String resimUrl;
-    @Column(name = "is_uptadated")
-    private boolean isUptated;
-    @Column(name = "sifre")
-    private String sifre;
-    @Column(name = "sifre_tekrari")
-    private String sifreTekrar;
+    private  String resimUrl;
+//    private String pictureUrl = "https://res.cloudinary.com/torukobyte/image/upload/v1623515256/customer_rca6tq.png";
 
-    @OneToMany(mappedBy = "isVeren")
+    @Column(name = "is_updated")
+    private boolean isUpdated = false;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "isveren")
     private List<IsIlani> isIlani;
-
 }

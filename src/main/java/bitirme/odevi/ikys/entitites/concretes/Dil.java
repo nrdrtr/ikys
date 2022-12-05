@@ -1,31 +1,32 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Data
 @Entity
-@Table(name = "diller")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Table(name = "diller")
 public class Dil {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dil_id")
-    private int dilId;
-    @Column(name = "dil_ismi")
-    private String dilAdi;
-    @Column(name = "dil_seviyesi")
-    private String dilSeviye;
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    private int id;
+
+    @Column(name = "dil_adi")
+    private String dilAdı;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "dil", cascade = CascadeType.DETACH)
     private List<IsArayanDilleri> isArayanDilleri;
-
-
 }

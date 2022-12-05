@@ -1,30 +1,31 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 
+@Data
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "favoriler")
-@Getter
-@Setter
 public class Favori {
+
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @NotNull
         private int id;
-        @ManyToOne()
-        @JoinColumn(name = "is_arayan_id",referencedColumnName = "kullanıcı_id")
+
+        @ManyToOne(cascade = CascadeType.DETACH)
+        @JoinColumn(name = "is_arayan_id")
         private IsArayan isArayan;
 
         @ManyToOne(cascade = CascadeType.DETACH)
-        @JoinColumn(name = "is_ılan_id")
-        private IsIlani isIlani;
-
-
+        @JoinColumn(name = "is_ilan_id")
+        private  IsIlani isIlani;
 }

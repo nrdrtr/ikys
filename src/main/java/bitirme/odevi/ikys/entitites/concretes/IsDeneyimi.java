@@ -1,42 +1,49 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
+@Data
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "is_deneyimleri")
-@Getter
-@Setter
+@NoArgsConstructor
+@Table(name = "job_experiences")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "curriculaVitae"})
+
 public class IsDeneyimi {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "ozgecmis_id",referencedColumnName = "id")
+    @Column(name = "company_name")
+    private String companyName;
+
+    @Column(name = "position_name")
+    private String positionName;
+
+    @Column(name = "start_date")
+    @NotNull
+    @NotBlank
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
+
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "curricula_vitae_id")
     private Ozgecmis ozgecmis;
-
-    @Column(name = "sirket_adi")
-    private String sirketAdi;
-
-    @Column(name = "pozisyon_adi")
-    private String pozisyonAdi;
-
-    @Column(name = "baslangic_tarihi")
-    private Date baslangicTarihi;
-
-    @Column(name = "bitis_tarihi")
-    private Date bitisTarihi;
-
-
-
-
 }
+
+
+

@@ -1,4 +1,4 @@
-package bitirme.odevi.ikys.api.controlleres;
+package bitirme.odevi.ikys.webApi.controllers;
 
 import bitirme.odevi.ikys.bussiness.abstracts.IsVerenService;
 import bitirme.odevi.ikys.entitites.concretes.IsVeren;

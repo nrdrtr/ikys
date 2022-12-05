@@ -1,4 +1,4 @@
-package bitirme.odevi.ikys.api.controlleres;
+package bitirme.odevi.ikys.webApi.controllers;
 
 import bitirme.odevi.ikys.bussiness.abstracts.IDillerService;
 import bitirme.odevi.ikys.entitites.concretes.Dil;
@@ -23,7 +23,6 @@ public class DilController {
 
     @GetMapping("/getall")
     public List<Dil> getDiller(){
-
         return this.dillerService.getDiller();
     }
 

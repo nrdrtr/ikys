@@ -1,18 +1,15 @@
 package bitirme.odevi.ikys.bussiness.concretes;
 
-import bitirme.odevi.ikys.bussiness.abstracts.IIsArayanService;
-import bitirme.odevi.ikys.core.utilities.results.DataResult;
-import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
+import bitirme.odevi.ikys.bussiness.abstracts.IsArayanService;
 import bitirme.odevi.ikys.dataAccess.abstracts.IsArayanDao;
 import bitirme.odevi.ikys.entitites.concretes.IsArayan;
-import nonapi.io.github.classgraph.json.JSONUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class IsArayanManager implements IIsArayanService {
+public class IsArayanManager implements IsArayanService {
 
     private IsArayanDao isArayanDao;
 
@@ -23,8 +20,8 @@ public class IsArayanManager implements IIsArayanService {
     }
 
     @Override
-    public List<IsArayan> getIsArayan() {
-        return this.isArayanDao.findAll();
+    public List<IsArayan> getAllIsArayan() {
+        return isArayanDao.findAll();
     }
 
     @Override

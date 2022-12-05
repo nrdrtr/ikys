@@ -1,6 +1,6 @@
-package bitirme.odevi.ikys.api.controlleres;
+package bitirme.odevi.ikys.webApi.controllers;
 
-import bitirme.odevi.ikys.bussiness.abstracts.IIsArayanService;
+import bitirme.odevi.ikys.bussiness.abstracts.IsArayanService;
 import bitirme.odevi.ikys.entitites.concretes.IsArayan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,17 +11,17 @@ import java.util.List;
 @RequestMapping("/api/isarayan")
 public class IsArayanController {
 
-    private IIsArayanService isArayanService;
+    private IsArayanService isArayanService;
 
     @Autowired
-    public IsArayanController(IIsArayanService isArayanService) {
+    public IsArayanController(IsArayanService isArayanService) {
         super();
         this.isArayanService = isArayanService;
     }
 
     @GetMapping("/getall")
     public List<IsArayan> getIsArayan(){
-        return this.isArayanService.getIsArayan();
+        return this.isArayanService.getAllIsArayan();
     }
 
     @PostMapping("/save")

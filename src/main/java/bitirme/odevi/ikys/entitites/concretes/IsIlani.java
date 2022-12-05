@@ -1,61 +1,83 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
+@Data
 @Entity
-@NoArgsConstructor
+@Table(name = "job_adverts")
 @AllArgsConstructor
-@Table(name = "is_ilanları")
-@Getter
-@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "favorites"})
+
 public class IsIlani {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @NotNull
     private int id;
+
+    @Column(name = "description")
+    @NotNull
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String description;
+
+    @Column(name = "salary")
+    @NotNull
+    private int salary;
+
+    @Column(name = "position_count")
+    @NotNull
+    private int positionCount;
+
+    @Column(name = "deadline")
+    @NotNull
+    private LocalDate deadline;
+
+    @Column(name = "airdate")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private LocalDateTime airdate = LocalDateTime.now();
+
+    @Column(name = "uptime")
+    @NotNull
+    private String upTime;
+
+    @Column(name = "type_of_employment")
+    @NotNull
+    private String typeOfEmployment;
+
+    @Column(name = "is_active")
+    @NotNull
+    private boolean isActive = true;
+
+    @Column(name = "is_confirmed")
+    @NotNull
+    private boolean isConfirmed = false;
+
+    @ManyToOne()
+    @JoinColumn(name = "isveren_id")
+    private IsVeren  isveren;
+
     @ManyToOne
-    @JoinColumn(name = "isveren_id", referencedColumnName = "kullanıcı_id")
-    private IsVeren isVeren;
-
-    @OneToOne
-    @JoinColumn(name = "sehir_id", referencedColumnName = "sehir_id")
-    private Sehir sehir;
-
-
-    @OneToOne(mappedBy = "isIlani")
-    @JoinColumn(name = "is_pozisyon_id", referencedColumnName = "id")
+    @JoinColumn(name = "is_pozisyonu_id")
     private IsPozisyonu isPozisyonu;
 
+    @ManyToOne()
+    @JoinColumn(name = "sehir_id")
+    private Sehir sehir;
+
     @OneToMany(mappedBy = "isIlani", cascade = CascadeType.DETACH)
-    private  List<Favori> favori;
-
-    @Column(name = "aciklama")
-    private String acıklama;
-
-    @Column(name = "maas")
-    private int maas;
-
-    @Column(name = "pozisyon_sayisi")
-    private int pozisyonSayisi;
-
-    @Column(name = "yayin_tarihi")
-    private Date yayinTarihi;
-
-
-    @Column(name = "son_tarih")
-    private Date sonTarih;
-
-    @Column(name = "calisma_turu")
-    private String calismaTuru;
-
-
-    @Column(name = "calisma_suresi")
-    private String calismaSuresi;
+    private List<Favori> favoriler;
 }

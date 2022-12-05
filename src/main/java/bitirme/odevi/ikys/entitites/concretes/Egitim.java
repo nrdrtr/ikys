@@ -1,46 +1,47 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
+@Data
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@NoArgsConstructor
 @Table(name = "egitimler")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmisler"})
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmis"})
 public class Egitim {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "ozgecmis_id",referencedColumnName = "id")
+    @Column(name = "baslangic_tarihi")
+    @NotNull
+    @NotBlank
+    private LocalDate baslangicTarihi;
+
+    @Column(name = "bitis_tarihi")
+    private LocalDate bitisTarihi;
+
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "ozgecmis_id")
     private Ozgecmis ozgecmis;
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "okul_id",referencedColumnName = "okul_id")
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "okul_id")
     private Okul okul;
 
-
-    @ManyToOne
-    @JoinColumn(name="bolum_id",referencedColumnName ="bolum_id" )
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "bolum_id")
     private Bolum bolum;
-
-
-    @Column(name = "baslangic_tarihi")
-    private Date baslangicTarihi;
-    @Column(name = "bitis_tarihi")
-    private Date bitisTarihi;
 }

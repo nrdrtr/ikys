@@ -1,28 +1,34 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
+@EqualsAndHashCode(callSuper = false)
+@Data
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Table(name = "cities")
 @AllArgsConstructor
-@Table(name = "sehirler")
+@NoArgsConstructor
 public class Sehir {
-
      @Id
+     @NotNull
+     @Column(name = "id")
      @GeneratedValue(strategy = GenerationType.IDENTITY)
-     @Column(name = "sehir_id")
      private int id;
+
      @Column(name = "sehir_adi")
-     private String sehirIsmi;
+     @NotNull
+     private String cityName;
 
-     @OneToOne(mappedBy = "sehir")
-     private IsIlani isIlani;
+     @JsonIgnore
+     @OneToMany(mappedBy = "sehir", cascade = CascadeType.DETACH)
+     private List<IsIlani> isIlanlari;
 }
-

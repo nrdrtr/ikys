@@ -1,35 +1,32 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
+@Data
 @Entity
-@NoArgsConstructor
+@Table(name = "job_positions", uniqueConstraints = {@UniqueConstraint(columnNames = {"job_title"})})
 @AllArgsConstructor
-@Table(name = "is_pozisyonları")
-@Getter
-@Setter
+@NoArgsConstructor
 public class IsPozisyonu {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @NotNull
     private int id;
 
-    @Column(name = "is_ismi")
-    private String isIsmi;
+    @Column(name = "job_title")
+    @NotNull
+    private String jobTitle;
 
-
-    @ManyToOne
-    @JoinColumn(name = "is_id")
-    private Is is;
-
-
-    @OneToOne
-    private IsIlani isIlani;
+    @JsonIgnore
+    @OneToMany(mappedBy = "isPozisyonu")
+    private List< IsIlani> isIlani;
 }

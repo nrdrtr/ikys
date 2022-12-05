@@ -1,31 +1,31 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "teknolojiler")
 @Getter
 @Setter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "teknolojiler")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmis"})
+
 public class Teknoloji {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private int id;
 
+    @Column(name = "technologies")
+    private String plName;
 
-    @ManyToOne()
-    @JoinColumn(name = "ozgecmis_id",referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "ozgecmis_id")
     private Ozgecmis ozgecmis;
-
-
-    @Column(name = "teknolojiler")
-    private String teknolojiler;
-
 }

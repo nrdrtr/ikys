@@ -1,12 +1,11 @@
 package bitirme.odevi.ikys.bussiness.abstracts;
 
-import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.entitites.concretes.IsArayan;
 
 import java.util.List;
 
-public interface IIsArayanService {
+public interface IsArayanService {
 
-   List<IsArayan> getIsArayan();
+    List<IsArayan> getAllIsArayan();
     void save(IsArayan isArayan);
 }

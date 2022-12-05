@@ -1,41 +1,46 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "is_arayanlar")
+
+@EqualsAndHashCode(callSuper = false)
 @Getter
 @Setter
-@PrimaryKeyJoinColumn(name = "kullanıcı_id", referencedColumnName = "kullanıcı_id")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmis", "favori"})
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "is_arayanlar", uniqueConstraints = {@UniqueConstraint(columnNames = {"kimlik_numarasi"})})
+@PrimaryKeyJoinColumn(name = "kullanici_id", referencedColumnName = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmis", "favoriler"})
 public class IsArayan extends Kullanıcı {
 
     @Column(name = "adi")
-    private String adi;
+    @NotNull
+    private String firstName;
 
     @Column(name = "soyadi")
-    private String soyadi;
+    @NotNull
+    private String  lastName;
 
-    @Column(name = "kimlik_numarası")
-    private String kimlikNumarasi;
+    @Column(name = "kimlik_numarasi")
+    @NotNull
+    private String  kimlikNumarasi;
 
-    @Column(name = "dogum_tarihi")
-    private Date dogumTarihi;
+    @Column(name = "birth_date")
+    @NotNull
+    private LocalDate birthDate;
 
-    @OneToOne(mappedBy = "isArayan")
-    private Ozgecmis ozgecmis;
+    @JsonIgnore
+    @OneToMany(mappedBy = "isArayan", cascade = CascadeType.DETACH)
+    private List<Ozgecmis> ozgecmis;
 
-    @OneToMany(mappedBy = "isArayan")
-    private List<Favori> favori;
-
+    @OneToMany(mappedBy = "isArayan", cascade = CascadeType.DETACH)
+    private List<Favori> favoriler;
 }

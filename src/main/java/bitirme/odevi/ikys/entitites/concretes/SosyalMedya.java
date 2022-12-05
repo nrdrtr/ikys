@@ -1,25 +1,35 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
-import lombok.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
+@Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Getter
 @Table(name = "sosyal_medyalar")
-@Setter
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmis"})
 public class SosyalMedya {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    int sosyalMedyaId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    private int id;
 
-    @Column(name = "sosyal_medya_adi")
-    String sosyalMedyaAdı;
+    @Column(name = "github_username")
+    private String githubUsername;
 
-    @ManyToOne()
+    @Column(name = "linkedin_username")
+    private String linkedinUsername;
+
+    @OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "ozgecmis_id")
     private Ozgecmis ozgecmis;
 }

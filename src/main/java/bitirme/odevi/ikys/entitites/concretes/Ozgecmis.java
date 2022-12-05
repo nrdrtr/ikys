@@ -1,48 +1,49 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "ozgecmisler")
 @Getter
 @Setter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "ozgecmisler")
 public class Ozgecmis {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "is_arayan_id",referencedColumnName = "kullanıcı_id")
+    @Column(name = "cover_letter")
+    private String coverLetter;
+
+    @Column(name = "picture_url")
+    private String pictureUrl;
+
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "is_arayan_id")
     private IsArayan isArayan;
 
-    @OneToMany(mappedBy = "ozgecmis")
-    private List<Teknoloji> teknoloji;
+    @OneToOne(mappedBy = "ozgecmis", cascade = CascadeType.DETACH)
+    private SosyalMedya sosyalMedya;
 
-    @OneToMany(mappedBy = "ozgecmis")
-    private List<Egitim> egitim;
+    @OneToMany(mappedBy = "ozgecmis", cascade = CascadeType.DETACH)
+    private List< Egitim> egitimler;
 
-    @OneToMany(mappedBy = "ozgecmis")
+    @OneToMany(mappedBy = "ozgecmis", cascade = CascadeType.DETACH)
+    private List<IsDeneyimi> isDeneyimleri;
+
+    @OneToMany(mappedBy = "ozgecmis", cascade = CascadeType.DETACH)
     private List<IsArayanDilleri> isArayanDilleri;
 
-    @OneToMany(mappedBy = "ozgecmis")
-    private List<SosyalMedya> sosyalMedya;
-
-    @Column(name = "resim_url")
-    private String resimUrl;
-
-    @Column(name = "on_yazi")
-    private String onYazi;
-
-    @OneToMany(mappedBy = "ozgecmis")
-    private List<IsDeneyimi> isDeneyimi;
+    @OneToMany(mappedBy = "ozgecmis", cascade = CascadeType.DETACH)
+    private List<Teknoloji> teknolojiler;
 }

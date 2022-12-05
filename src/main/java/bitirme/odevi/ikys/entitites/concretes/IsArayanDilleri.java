@@ -1,34 +1,43 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+@Data
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "is_arayan_dilleri")
-@Getter
-@Setter
+@NoArgsConstructor
+@Table(name = "jobseeker_languages")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmis"})
 public class IsArayanDilleri {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int  id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    private int id;
+
+    @Column(name = "dil_seviyesi")
+    @Min(1)
+    @Max(5)
+    @NotNull
+    @NotBlank
+    private int dilSeviyesi;
 
     @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "language_id")
+    @JoinColumn(name = "dil_id")
     private Dil dil;
+
     @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "ozgecmis_id",referencedColumnName = "id")
+    @JoinColumn(name = "ozgecmis_id")
     private Ozgecmis ozgecmis;
-
-
-
-
 }

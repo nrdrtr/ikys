@@ -19,11 +19,5 @@ public class IkysApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IkysApplication.class, args);
 	}
-//	@Bean
-//	public Docket  api() {
-//		return new Docket(DocumentationType.SWAGGER_2)
-//				.select()
-//				.apis(RequestHandlerSelectors.basePackage("bitirme.odevi.ikys"))
-//				.build();
-//	}
+
 }

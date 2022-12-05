@@ -1,33 +1,32 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Data
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "okullar")
-@Getter
-@Setter
+@NoArgsConstructor
+@Table(name = "schools")
 public class Okul {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "okul_id")
-    private int okulId;
+    @NotNull
+    private int id;
 
-    @Column(name = "okul_adi")
-    private String okulAdi;
+    @Column(name = "school_name")
+    private String schoolName;
 
-    @ManyToOne()
-    private Bolum bolum;
-
-    @OneToMany(mappedBy = "okul")
-    private List<Egitim> egitim;
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "okul", cascade = CascadeType.DETACH)
+    private List<Egitim> egitimler;
 }
