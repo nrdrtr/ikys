@@ -3,18 +3,16 @@ package bitirme.odevi.ikys.entitites.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = false)
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "cities")
+@Table(name = "sehirler")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Sehir {
@@ -26,7 +24,7 @@ public class Sehir {
 
      @Column(name = "sehir_adi")
      @NotNull
-     private String cityName;
+     private String sehirAdi;
 
      @JsonIgnore
      @OneToMany(mappedBy = "sehir", cascade = CascadeType.DETACH)

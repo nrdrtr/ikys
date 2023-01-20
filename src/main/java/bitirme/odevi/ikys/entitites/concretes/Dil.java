@@ -24,7 +24,7 @@ public class Dil {
     private int id;
 
     @Column(name = "dil_adi")
-    private String dilAdı;
+    private String name;
 
     @JsonIgnore
     @OneToMany(mappedBy = "dil", cascade = CascadeType.DETACH)

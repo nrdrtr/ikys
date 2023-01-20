@@ -2,6 +2,7 @@ package bitirme.odevi.ikys.webApi.controllers;
 
 import bitirme.odevi.ikys.bussiness.abstracts.IsVerenService;
 import bitirme.odevi.ikys.entitites.concretes.IsVeren;
+import bitirme.odevi.ikys.entitites.dto.IsverenWithIsIlanıDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,4 +29,11 @@ public class IsVerenController {
     public void save(@RequestBody  IsVeren isVeren){
         this.isVerenService.save(isVeren);
     }
+
+    @GetMapping("/getIsverenWithIsIlanıDetails")
+    public List<IsverenWithIsIlanıDto> getIsverenWithIsIlanıDetails(){
+        return this.isVerenService.getIsverenWithIsIlanıDetails();
+    }
+
+
 }

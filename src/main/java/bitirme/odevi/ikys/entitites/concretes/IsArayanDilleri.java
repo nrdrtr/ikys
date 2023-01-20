@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "jobseeker_languages")
+@Table(name = "is_arayan_dilleri")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmis"})
 public class IsArayanDilleri {
 

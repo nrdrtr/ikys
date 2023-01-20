@@ -22,11 +22,11 @@ public class Ozgecmis {
     @NotNull
     private int id;
 
-    @Column(name = "cover_letter")
-    private String coverLetter;
+    @Column(name = "on_yazi")
+    private String onYazi;
 
-    @Column(name = "picture_url")
-    private String pictureUrl;
+    @Column(name = "resim_url")
+    private String resimUrl;
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "is_arayan_id")

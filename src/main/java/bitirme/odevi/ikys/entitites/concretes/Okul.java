@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "schools")
+@Table(name = "okullar")
 public class Okul {
 
     @Id
@@ -23,8 +23,8 @@ public class Okul {
     @NotNull
     private int id;
 
-    @Column(name = "school_name")
-    private String schoolName;
+    @Column(name = "okul_adi")
+    private String okulAdi;
 
     @JsonIgnore
     @OneToMany(mappedBy = "okul", cascade = CascadeType.DETACH)

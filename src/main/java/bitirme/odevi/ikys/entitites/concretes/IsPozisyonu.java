@@ -2,16 +2,15 @@ package bitirme.odevi.ikys.entitites.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "job_positions", uniqueConstraints = {@UniqueConstraint(columnNames = {"job_title"})})
+@Table(name = "is_pozisyonlari", uniqueConstraints = {@UniqueConstraint(columnNames = {"is_ismi"})})
 @AllArgsConstructor
 @NoArgsConstructor
 public class IsPozisyonu {
@@ -22,11 +21,11 @@ public class IsPozisyonu {
     @NotNull
     private int id;
 
-    @Column(name = "job_title")
+    @Column(name = "is_ismi")
     @NotNull
-    private String jobTitle;
+    private String isIsmi;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "isPozisyonu")
-    private List< IsIlani> isIlani;
+    @OneToMany(mappedBy = "isPozisyonu",cascade=CascadeType.ALL)
+    private List<IsIlani> isIlani;
 }

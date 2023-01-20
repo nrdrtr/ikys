@@ -1,18 +1,20 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "favoriler")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","isArayan"})
 public class Favori {
 
         @Id

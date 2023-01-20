@@ -15,11 +15,11 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "job_adverts")
+@Table(name = "is_ilanlari")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "favorites"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "favoriler"})
 
 public class IsIlani {
 
@@ -29,52 +29,49 @@ public class IsIlani {
     @NotNull
     private int id;
 
-    @Column(name = "description")
+    @Column(name = "aciklama")
     @NotNull
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String description;
 
-    @Column(name = "salary")
+    @Column(name = "maas")
     @NotNull
-    private int salary;
+    private int maas;
 
-    @Column(name = "position_count")
+    @Column(name = "pozisyon_sayisi")
     @NotNull
-    private int positionCount;
+    private int pozisyonSayisi;
 
-    @Column(name = "deadline")
+    @Column(name = " bitis_tarihi")
     @NotNull
-    private LocalDate deadline;
+    private LocalDate bitisTarihi;
 
-    @Column(name = "airdate")
+    @Column(name = "yayin_tarihi")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime airdate = LocalDateTime.now();
+    private LocalDateTime  yayinTarihi = LocalDateTime.now();
 
-    @Column(name = "uptime")
+    @Column(name = "calisma_zamani")
     @NotNull
-    private String upTime;
+    private String calismaZamani;
 
-    @Column(name = "type_of_employment")
+    @Column(name = "calisma_turu")
     @NotNull
-    private String typeOfEmployment;
+    private String calismaTuru;
 
-    @Column(name = "is_active")
+    @Column(name = "aktif_mi")
     @NotNull
-    private boolean isActive = true;
+    private boolean aktifMi = true;
 
-    @Column(name = "is_confirmed")
-    @NotNull
-    private boolean isConfirmed = false;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "isveren_id")
     private IsVeren  isveren;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "is_pozisyonu_id")
     private IsPozisyonu isPozisyonu;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "sehir_id")
     private Sehir sehir;
 

@@ -33,9 +33,9 @@ public class IsArayan extends Kullanıcı {
     @NotNull
     private String  kimlikNumarasi;
 
-    @Column(name = "birth_date")
+    @Column(name = "dogum_tarihi")
     @NotNull
-    private LocalDate birthDate;
+    private LocalDate  dogumTarihi;
 
     @JsonIgnore
     @OneToMany(mappedBy = "isArayan", cascade = CascadeType.DETACH)

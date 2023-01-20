@@ -3,16 +3,13 @@ package bitirme.odevi.ikys.entitites.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = false)
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "isverenler", uniqueConstraints = {@UniqueConstraint(columnNames = {"sirket_adi"})})
 @AllArgsConstructor
@@ -36,9 +33,8 @@ public class IsVeren extends Kullanıcı {
     private  String resimUrl;
 //    private String pictureUrl = "https://res.cloudinary.com/torukobyte/image/upload/v1623515256/customer_rca6tq.png";
 
-    @Column(name = "is_updated")
-    private boolean isUpdated = false;
-
+    @Column(name = "guncel_mi")
+    private boolean guncelMi = false;
 
     @JsonIgnore
     @OneToMany(mappedBy = "isveren")

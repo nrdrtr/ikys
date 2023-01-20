@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Table(name = "teknolojiler")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmis"})
-
 public class Teknoloji {
 
     @Id
@@ -22,8 +21,8 @@ public class Teknoloji {
     @NotNull
     private int id;
 
-    @Column(name = "technologies")
-    private String plName;
+    @Column(name = "teknolojiler")
+    private String teknoloji;
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "ozgecmis_id")

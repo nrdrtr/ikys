@@ -1,6 +1,8 @@
 package bitirme.odevi.ikys.bussiness.concretes;
 
 import bitirme.odevi.ikys.bussiness.abstracts.IDillerService;
+import bitirme.odevi.ikys.core.utilities.results.DataResult;
+import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
 import bitirme.odevi.ikys.dataAccess.abstracts.DilDao;
 import bitirme.odevi.ikys.entitites.concretes.Dil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,14 @@ public class DillerManager implements IDillerService {
         this.dillerDao = dillerDao;
     }
     @Override
-    public List<Dil> getDiller() {
-        return this.dillerDao.findAll();
+    public DataResult<List<Dil>> getDiller() {
+
+        return new SuccessDataResult<>(this.dillerDao.findAll(),"Diller Listelendi");
     }
+
+    @Override
+    public DataResult<List<Dil>> findAllByName() {
+        return new SuccessDataResult<>(this.dillerDao.findAllByName("name"),"Diller Listelendi");
+    }
+
 }

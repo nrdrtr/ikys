@@ -23,11 +23,11 @@ public class SosyalMedya {
     @NotNull
     private int id;
 
-    @Column(name = "github_username")
-    private String githubUsername;
+    @Column(name = "github_kullanici_adi")
+    private String githubKullaniciAdi;
 
-    @Column(name = "linkedin_username")
-    private String linkedinUsername;
+    @Column(name = "linkedin_kullanici_adi")
+    private String linkedinKullaniciAdi;
 
     @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "ozgecmis_id")

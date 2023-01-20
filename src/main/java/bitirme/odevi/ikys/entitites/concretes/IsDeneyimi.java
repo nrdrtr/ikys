@@ -2,21 +2,20 @@ package bitirme.odevi.ikys.entitites.concretes;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "job_experiences")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "curriculaVitae"})
+@Table(name = "is_deneyimleri")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmis"})
 
 public class IsDeneyimi {
 
@@ -26,22 +25,22 @@ public class IsDeneyimi {
     @NotNull
     private int id;
 
-    @Column(name = "company_name")
-    private String companyName;
+    @Column(name = "sirket_adi")
+    private String sirketAdi;
 
-    @Column(name = "position_name")
-    private String positionName;
+    @Column(name = "pozisyon_adi")
+    private String pozisyonAdi;
 
-    @Column(name = "start_date")
+    @Column(name = "baslangic_tarihi")
     @NotNull
-    @NotBlank
-    private LocalDate startDate;
 
-    @Column(name = "end_date")
-    private LocalDate endDate;
+    private LocalDate baslangicTarihi;
+
+    @Column(name = "bitis_tarihi")
+    private LocalDate bitisTarihi;
 
     @ManyToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "curricula_vitae_id")
+    @JoinColumn(name = "ozgecmis_id")
     private Ozgecmis ozgecmis;
 }
 

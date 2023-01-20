@@ -3,6 +3,7 @@ package bitirme.odevi.ikys.bussiness.concretes;
 import bitirme.odevi.ikys.bussiness.abstracts.IsVerenService;
 import bitirme.odevi.ikys.dataAccess.abstracts.IsVerenDao;
 import bitirme.odevi.ikys.entitites.concretes.IsVeren;
+import bitirme.odevi.ikys.entitites.dto.IsverenWithIsIlanıDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,10 @@ public class IsVerenManager implements IsVerenService {
     public void save(IsVeren isVeren) {
         this.isVerenDao.save(isVeren);
 
+    }
+
+    @Override
+    public List<IsverenWithIsIlanıDto> getIsverenWithIsIlanıDetails() {
+        return this.isVerenDao.getIsverenWithIsIlanıDetails();
     }
 }

@@ -3,7 +3,7 @@ package bitirme.odevi.ikys.core.utilities.results;
 public class SuccessResult extends Result{
 
 
-    public SuccessResult(boolean success) {
+    public SuccessResult(String success) {
         super(true);
     }
 

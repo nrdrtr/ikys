@@ -1,4 +1,11 @@
 package bitirme.odevi.ikys.bussiness.concretes;
 
-public class OzgecmisManager {
+import bitirme.odevi.ikys.bussiness.abstracts.OzgecmisService;
+import org.springframework.stereotype.Service;
+
+
+@Service
+public class OzgecmisManager implements OzgecmisService {
+
+
 }
