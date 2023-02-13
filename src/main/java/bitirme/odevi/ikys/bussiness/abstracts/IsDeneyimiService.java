@@ -14,8 +14,5 @@ public interface IsDeneyimiService {
 
     Result delete(int id);
 
-    Result update(IsDeneyimi isDeneyimi);
-
-
 
 }

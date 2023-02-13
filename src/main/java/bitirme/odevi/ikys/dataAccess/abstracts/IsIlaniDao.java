@@ -17,9 +17,10 @@ import java.util.List;
 public interface IsIlaniDao extends JpaRepository<IsIlani, Integer> {
 
 
-//    DataResult<List<IsIlani>> findAllByIsActiveTrue();
+    IsIlani  findBySehir(String sehir);
 
-    //DataResult<List<IsIlani>> findByAllAktifMiTrue(Sort sort);
+    //aktifMi
+    List<IsIlani> findAllByAktifMiTrue(Sort sort);
 
     List<IsIlani> findByDescriptionStartsWith(String description);
 
@@ -32,6 +33,35 @@ public interface IsIlaniDao extends JpaRepository<IsIlani, Integer> {
     List<IsverenWithIsIlanıDto> getIsverenWithIsIlanıDetails();
 
 
+
+
+//    List<JobAdvert> findAllByIsActiveTrue();
+//
+//    List<JobAdvert> getJobAdvertByEmployer_CompanyName(String companyName, Sort sort);
+//
+//    List<JobAdvert> getJobAdvertByEmployerId(int employerId, Sort sort);
+//    ısActive
+//
+//    List<JobAdvert> findAllByIsActiveTrue(Sort sort);
+//
+//    List<JobAdvert> getJobAdvertByIsActiveTrueAndIsConfirmedTrue(Pageable pageable);
+//
+//    List<JobAdvert> getJobAdvertByIsActiveTrueAndIsConfirmedTrue();
+//
+//    @Transactional
+//    @Modifying
+//    @Query("Update JobAdvert set isActive =:active where id =:jobAdvertId")
+//    void changeIsActive(boolean active, int jobAdvertId);
+//
+//    @Transactional
+//    @Modifying
+//    @Query("Update JobAdvert set isConfirmed =:confirm where id =:jobAdvertId")
+//    void changeIsConfirmed(boolean confirm, int jobAdvertId);
+//
+//    JobAdvert getJobAdvertById(int id);
+//
+//    @Transactional
+//    void deleteJobAdvertById(int id);
 
 }
 

@@ -10,6 +10,7 @@ import java.util.List;
 
 @RequestMapping("/api/isveren")
 @RestController
+@CrossOrigin
 public class IsVerenController {
 
     private IsVerenService isVerenService;
@@ -28,6 +29,8 @@ public class IsVerenController {
     @PostMapping("/save")
     public void save(@RequestBody  IsVeren isVeren){
         this.isVerenService.save(isVeren);
+
+
     }
 
     @GetMapping("/getIsverenWithIsIlanıDetails")

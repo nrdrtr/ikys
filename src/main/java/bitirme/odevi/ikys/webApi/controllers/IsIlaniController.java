@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/isilani")
+@CrossOrigin
 public class IsIlaniController {
 
     private IsIlanıService isIlaniService;
@@ -37,6 +38,17 @@ public class IsIlaniController {
     DataResult<List<IsIlani>> getByPage(int pageNo, int pageSize) {
         return this.isIlaniService.getAll(pageNo, pageSize);
     }
+
+    @GetMapping("/getByIsActiveTrue")
+    public DataResult<List<IsIlani>> findAllByIsActiveTrue(@RequestParam boolean isDesc) {
+        return this.isIlaniService.findAllByIsActiveTrue(isDesc);
+    }
+
+    @GetMapping("/getBySehir")
+    public DataResult<IsIlani> findBySehir(@RequestParam String sehir) {
+        return this.isIlaniService.findBySehir(sehir);
+    }
+
 
 
     @PostMapping("/add")

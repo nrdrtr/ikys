@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FavoriManager  implements FavoriService {
+public class FavoriManager implements FavoriService {
 
-    private  FavoriDao favoriDao;
+    private FavoriDao favoriDao;
 
     @Autowired
     public FavoriManager(FavoriDao favoriDao) {
@@ -23,15 +23,15 @@ public class FavoriManager  implements FavoriService {
     }
 
     @Override
-    public DataResult<List<Favori>> getFavoriteByIsArayanId(int id) {
-        return new SuccessDataResult<>(this.favoriDao.getFavoriteByIsArayanId(id),"favorilerin listelendi");
+    public DataResult<List<Favori>> getFavoriByIsArayanId(int id) {
+        return new SuccessDataResult<>(this.favoriDao.getFavoriByIsArayanId(id), "favorilerin listelendi");
     }
 
     @Override
     public Result save(Favori favori) {
-            this.favoriDao.save(favori);
-            return new SuccessDataResult<>("favori güncellendi");
-        }
+        this.favoriDao.save(favori);
+        return new SuccessDataResult<>("favori güncellendi");
+    }
 
     @Override
     public Result delete(int id) {
@@ -39,6 +39,10 @@ public class FavoriManager  implements FavoriService {
         return new SuccessResult("favori silindi");
     }
 
+    @Override
+    public Result deleteFavoriByIsArayanIdAndIsIlaniId(int jobSeekerId, int jobAdvertId) {
+        return null;
+    }
 
 
 }

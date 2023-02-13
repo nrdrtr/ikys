@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface BolumDao extends JpaRepository<Bolum,Integer> {
 
 
-
 }

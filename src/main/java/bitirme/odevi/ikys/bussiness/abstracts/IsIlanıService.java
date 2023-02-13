@@ -9,20 +9,15 @@ import java.util.List;
 
 public interface IsIlanıService {
 
-
     DataResult<List<IsIlani>> getAll();
     DataResult<List<IsIlani>> getAllSorted();
     DataResult<List<IsIlani>> getActiveJobAdverts();
-
-   // DataResult<List<JobAdvert>> findAllByIsActiveTrue(boolean isDesc);
-
+    DataResult<IsIlani>  findBySehir(String sehir);
+    DataResult<List<IsIlani>> findAllByIsActiveTrue(boolean isDesc);
     DataResult<List<IsIlani>> getAll(int pageNo, int pageSize);
     Result save(IsIlani isIlani);
-
     List<IsIlani> findByDescriptionStartsWith(String description);
-
     IsIlani findByDescription(String  description);
-
     List<IsverenWithIsIlanıDto> getIsverenWithIsIlanıDetails();
 
 

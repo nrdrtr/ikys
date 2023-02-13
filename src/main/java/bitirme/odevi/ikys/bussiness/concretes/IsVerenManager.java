@@ -26,6 +26,7 @@ public class IsVerenManager implements IsVerenService {
 
     @Override
     public void save(IsVeren isVeren) {
+
         this.isVerenDao.save(isVeren);
 
     }
@@ -34,4 +35,20 @@ public class IsVerenManager implements IsVerenService {
     public List<IsverenWithIsIlanıDto> getIsverenWithIsIlanıDetails() {
         return this.isVerenDao.getIsverenWithIsIlanıDetails();
     }
+
+
+//    @Override
+//    public DataResult addPicture(MultipartFile multipartFile) throws IOException {
+//        Map options = new HashMap<>();
+//        var allowedFormats = Arrays.asList("png", "jpg", "jpeg");
+//        options.put("allowed_formats", allowedFormats);
+//        File file = convertToFile(multipartFile);
+//        Map uploader = null;
+//        try {
+//            uploader = cloudinary.uploader().upload(file, options);
+//        } catch (Exception e) {
+//            return new ErrorDataResult<>(e.getMessage());
+//        }
+//        return new SuccessDataResult<>(uploader);
+//    }
 }

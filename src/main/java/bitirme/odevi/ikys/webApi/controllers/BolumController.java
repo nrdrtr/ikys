@@ -2,6 +2,7 @@ package bitirme.odevi.ikys.webApi.controllers;
 
 import bitirme.odevi.ikys.bussiness.abstracts.BolumService;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
+import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.entitites.concretes.Bolum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/bolum")
+@RequestMapping("/api/bolumler")
+@CrossOrigin
 public class BolumController {
 
     private BolumService bolumService;
@@ -24,7 +26,7 @@ public class BolumController {
         return this.bolumService.getAll();
     }
     @PostMapping("/add")
-    public void add(@RequestBody Bolum bolum){
-        this.bolumService.save(bolum);
+    public Result add(@RequestBody Bolum bolum){
+       return this.bolumService.add(bolum);
     }
 }

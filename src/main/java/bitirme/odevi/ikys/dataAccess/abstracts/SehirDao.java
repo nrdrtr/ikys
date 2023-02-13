@@ -11,10 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface SehirDao extends JpaRepository<Sehir, Integer> {
-/*    @Transactional
-    @Modifying
-    @Query("update Sehir s set s.cityName = ?1 where s.cityName = ?2")
-    int update(String cityName, String cityName1);*/
+
 
 
 }

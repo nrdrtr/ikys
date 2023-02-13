@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/favori")
+@CrossOrigin//frontend ile bağlantı kurmak için
 public class FavoriController {
 
     private FavoriService favoriService;
@@ -24,7 +25,7 @@ public class FavoriController {
 
     @GetMapping("/getFavoriteByIsArayanId")
     public DataResult<List<Favori>>getFavoriteByIsArayanId(@RequestParam int id){
-       return this.favoriService.getFavoriteByIsArayanId(id);
+       return this.favoriService.getFavoriByIsArayanId(id);
     }
 
     @PostMapping("/save")

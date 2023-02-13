@@ -7,6 +7,7 @@ import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
 import bitirme.odevi.ikys.core.utilities.results.SuccessResult;
 import bitirme.odevi.ikys.dataAccess.abstracts.TeknolojiDao;
 import bitirme.odevi.ikys.entitites.concretes.Teknoloji;
+import bitirme.odevi.ikys.entitites.dto.TechnologyUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,15 @@ public class TeknolojiManger implements TeknolojiService {
     public Result add(Teknoloji teknoloji) {
         this.teknolojiDao.save(teknoloji);
         return new  SuccessResult(true,"başarıyla kaydedildi");
+    }
+
+    @Override
+    public Result deleteTeknolojiById(int id) {
+        return null;
+    }
+
+    @Override
+    public Result updateTechnology(TechnologyUpdateDto pl) {
+        return null;
     }
 }

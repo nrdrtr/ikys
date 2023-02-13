@@ -2,10 +2,11 @@ package bitirme.odevi.ikys.entitites.dto;
 
 import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CurriculaVitaeAddDto {
+public class  OzgecmisAddDto {
 
     private int id;
     private int isArayanId;

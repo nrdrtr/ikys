@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IDillerService  {
     DataResult<List<Dil>> getDiller();
-    DataResult<List<Dil>> findAllByName();
+    DataResult<List<Dil>> add(List<Dil> diller);
 }

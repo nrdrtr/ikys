@@ -14,6 +14,7 @@ import java.util.List;
 public class IsDeneyimiManager implements IsDeneyimiService {
 
     private IsDeneyimiDao isDeneyimiDao;
+
     @Autowired
     public IsDeneyimiManager(IsDeneyimiDao isDeneyimiDao) {
         this.isDeneyimiDao = isDeneyimiDao;
@@ -26,8 +27,7 @@ public class IsDeneyimiManager implements IsDeneyimiService {
             return new ErrorDataResult<>("İş Deneyimi Bulunamadı");
         }
         return new SuccessDataResult<List<IsDeneyimi>>
-                (this.isDeneyimiDao.getIsDeneyimiBitisTarihiByOzgecmis(id, sort),"İş deneyimleri listelendi (sondan başa doğru tarhi olarak)");
-
+                (this.isDeneyimiDao.getIsDeneyimiBitisTarihiByOzgecmis(id, sort), "İş deneyimleri listelendi (sondan başa doğru tarhi olarak)");
 
 
     }
@@ -35,20 +35,15 @@ public class IsDeneyimiManager implements IsDeneyimiService {
 
     @Override
     public Result add(IsDeneyimi isDeneyimi) {
-     
-            return new SuccessDataResult<IsDeneyimi>(isDeneyimi, "İş deneyimi eklendi");
-        }
 
-   
+        return new SuccessDataResult<IsDeneyimi>(isDeneyimi, "İş deneyimi eklendi");
+    }
+
 
     @Override
     public Result delete(int id) {
         this.isDeneyimiDao.deleteById(id);
-        return new SuccessResult(true,"İş deneyimi silindi");
+        return new SuccessResult(true, "İş deneyimi silindi");
     }
 
-    @Override
-    public Result update(IsDeneyimi isDeneyimi) {
-        return null;
-    }
 }

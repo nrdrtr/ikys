@@ -39,7 +39,7 @@ public class DefaultEmailService implements EmailService {
         messageHelper.setSubject(subject);
         messageHelper.setText(message);
         FileSystemResource file= new FileSystemResource(ResourceUtils.getFile(attachment));
-        messageHelper.addAttachment("Purchase Order", file);
+        messageHelper.addAttachment("dogrulama ", file);
         emailSender.send(mimeMessage);
     }
 }

@@ -23,11 +23,11 @@ public class IsArayan extends Kullanıcı {
 
     @Column(name = "adi")
     @NotNull
-    private String firstName;
+    private String adi;
 
     @Column(name = "soyadi")
     @NotNull
-    private String  lastName;
+    private String  soyadi;
 
     @Column(name = "kimlik_numarasi")
     @NotNull

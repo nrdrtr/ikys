@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SosyalMedyaDao extends JpaRepository<SosyalMedya, Integer> {
 
+    SosyalMedya getSosyalMedyaByOzgecmisId(int id);
+
+
 }
 
 

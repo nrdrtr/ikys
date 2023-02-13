@@ -4,15 +4,13 @@ import bitirme.odevi.ikys.bussiness.abstracts.IDillerService;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.entitites.concretes.Dil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/diller")
+@CrossOrigin
 public class DilController {
 
     private IDillerService  dillerService;
@@ -29,8 +27,8 @@ public class DilController {
     }
 
     @GetMapping("/getByDilAdi")//yanlış DÜZELECEK
-    public DataResult<List<Dil>> getDilAdi (@RequestParam String name){
-        return this.dillerService. findAllByName();
+    public DataResult<List<Dil>> getDilAdi (@RequestBody List<Dil> diller){
+        return this.dillerService.add(diller);
     }
 
 

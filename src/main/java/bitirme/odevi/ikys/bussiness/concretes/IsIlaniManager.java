@@ -48,12 +48,38 @@ public class IsIlaniManager implements IsIlanıService {
         return null;
     }
 
+    @Override
+    public DataResult<IsIlani> findBySehir(String sehir) {
+        return new SuccessDataResult<IsIlani>(this.isIlaniDao.findBySehir(sehir), "şehir bazlı iş ilanları listelendi");
+    }
+
 
     @Override
     public DataResult<List<IsIlani>> getAll(int pageNo, int pageSize) {
         PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
         return new SuccessDataResult<List<IsIlani>>
                 (this.isIlaniDao.findAll(pageable).getContent());
+    }
+
+
+    @Override
+    public DataResult<List<IsIlani>> findAllByIsActiveTrue(boolean isDesc) {
+
+        Sort sort;
+        if (isDesc) {
+            sort = Sort.by(Sort.Direction.DESC, "yayinTarihi");
+        } else {
+            sort = Sort.by(Sort.Direction.ASC, "yayinTarihi");
+        }
+
+        if ((long) this.isIlaniDao.findAllByAktifMiTrue(sort).size() > 0) {
+            return new SuccessDataResult<>(
+                    this.isIlaniDao.findAllByAktifMiTrue(sort),
+                    "Aktif tüm iş ilanları yayınlanma tarihine göre listelendi!");
+        }
+        return new ErrorDataResult<>(
+                this.isIlaniDao.findAllByAktifMiTrue(sort),
+                "Aktif iş ilanı bulunamadı!");
     }
 
     @Override

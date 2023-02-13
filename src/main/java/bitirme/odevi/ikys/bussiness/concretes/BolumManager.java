@@ -1,8 +1,7 @@
 package bitirme.odevi.ikys.bussiness.concretes;
 
 import bitirme.odevi.ikys.bussiness.abstracts.BolumService;
-import bitirme.odevi.ikys.core.utilities.results.DataResult;
-import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
+import bitirme.odevi.ikys.core.utilities.results.*;
 import bitirme.odevi.ikys.dataAccess.abstracts.BolumDao;
 import bitirme.odevi.ikys.entitites.concretes.Bolum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +20,15 @@ public class BolumManager  implements BolumService {
 
     @Override
     public DataResult<List<Bolum>> getAll() {
-
+        if (this.bolumDao.findAll().isEmpty()) {
+            return new ErrorDataResult<>("Bolum bulunamadı");
+        }
         return  new SuccessDataResult<>(this.bolumDao.findAll(),"Bolumler Listelendi");
     }
 
     @Override
-    public void save(Bolum bolum) {
-           this.bolumDao.save(bolum);
+    public Result add(Bolum bolum) {
+        this.bolumDao.save(bolum);
+        return new SuccessResult("Bölüm başarıyla eklendi!");
     }
 }

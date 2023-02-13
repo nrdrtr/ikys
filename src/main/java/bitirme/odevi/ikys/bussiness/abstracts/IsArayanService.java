@@ -10,7 +10,9 @@ import java.util.List;
 public interface IsArayanService {
 
     DataResult<List<IsArayan>> getAllIsArayan();
-    Result  save(IsArayan isArayan);
 
+    Result save(IsArayan isArayan);
+
+    Result deleteIsArayanById(int id);
 
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/isdeneyimi")
+@CrossOrigin
 public class IsDeneyimiController {
     IsDeneyimiService isDeneyimiService;
     @Autowired

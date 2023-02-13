@@ -35,4 +35,8 @@ public class Kullanıcı {
      private String sifreTekrari;
 
 
+    @Column(name = "aktif_mi")
+    private boolean  aktifMi = false;
+
+
 }

@@ -3,22 +3,20 @@ package bitirme.odevi.ikys.entitites.concretes;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "is_ilanlari")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
+//@EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "favoriler"})
 
 public class IsIlani {
@@ -42,13 +40,13 @@ public class IsIlani {
     @NotNull
     private int pozisyonSayisi;
 
-    @Column(name = " bitis_tarihi")
+    @Column(name = "bitis_tarihi")
     @NotNull
     private LocalDate bitisTarihi;
 
     @Column(name = "yayin_tarihi")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime  yayinTarihi = LocalDateTime.now();
+    private LocalDate  yayinTarihi;
 
     @Column(name = "calisma_zamani")
     @NotNull
@@ -60,7 +58,7 @@ public class IsIlani {
 
     @Column(name = "aktif_mi")
     @NotNull
-    private boolean aktifMi = true;
+    private boolean aktifMi ;
 
 
     @ManyToOne(cascade = CascadeType.PERSIST)

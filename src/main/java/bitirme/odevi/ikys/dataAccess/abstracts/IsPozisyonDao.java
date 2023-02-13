@@ -17,4 +17,5 @@ public interface IsPozisyonDao extends JpaRepository<IsPozisyonu, Integer> {
     //List<IsPozisyonu> findByJobTitleEndsWith(String isIsmi);
 
 
+
 }

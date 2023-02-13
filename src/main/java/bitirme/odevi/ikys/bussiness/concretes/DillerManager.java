@@ -2,6 +2,7 @@ package bitirme.odevi.ikys.bussiness.concretes;
 
 import bitirme.odevi.ikys.bussiness.abstracts.IDillerService;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
+import bitirme.odevi.ikys.core.utilities.results.ErrorDataResult;
 import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
 import bitirme.odevi.ikys.dataAccess.abstracts.DilDao;
 import bitirme.odevi.ikys.entitites.concretes.Dil;
@@ -19,15 +20,21 @@ public class DillerManager implements IDillerService {
         super();
         this.dillerDao = dillerDao;
     }
+
     @Override
     public DataResult<List<Dil>> getDiller() {
 
-        return new SuccessDataResult<>(this.dillerDao.findAll(),"Diller Listelendi");
+        if (this.dillerDao.findAll().isEmpty()) {
+            return new ErrorDataResult<>("Warning: Kayıtlı yabancı dil bulunamadı!");
+        }
+        return new SuccessDataResult<>(this.dillerDao.findAll(), "Success: Yabancı diller başarıyla listelendi!");
+
     }
 
     @Override
-    public DataResult<List<Dil>> findAllByName() {
-        return new SuccessDataResult<>(this.dillerDao.findAllByName("name"),"Diller Listelendi");
+    public DataResult<List<Dil>> add(List<Dil> diller) {
+        return new SuccessDataResult<>(this.dillerDao.saveAll(diller), "Success: Yabancı dil ekleme işlemi başarılı!");
     }
+
 
 }

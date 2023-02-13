@@ -11,7 +11,6 @@ import java.util.List;
 
 @Repository
 public interface DilDao extends JpaRepository<Dil, Integer> {
-
-       List<Dil> findAllByName(String name);
+       //List<Dil> findAllByName(String name);
 
 }

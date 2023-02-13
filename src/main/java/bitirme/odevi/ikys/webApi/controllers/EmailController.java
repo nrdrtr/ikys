@@ -13,7 +13,8 @@ import javax.mail.MessagingException;
 import java.io.FileNotFoundException;
 
 @RestController
-@RequestMapping("/email")
+//@RequestMapping("/email")
+@CrossOrigin
 public class EmailController {
 
     private static final Logger LOG = LoggerFactory.getLogger(EmailController.class);
@@ -21,7 +22,7 @@ public class EmailController {
     @Autowired
     EmailService emailService;
 
-    @GetMapping(value = "/simple-email/{user-email}")
+//    @GetMapping(value = "/simple-email/{user-email}")
     public @ResponseBody
     ResponseEntity<String> sendSimpleEmail(@PathVariable("user-email") String email) {
 
@@ -36,8 +37,7 @@ public class EmailController {
         return new ResponseEntity<>("Please check your inbox", HttpStatus.OK);
     }
 
-
-    @GetMapping(value = "/simple-order-email/{user-email}")
+              // get mapping(value = "/simple-order-email/{user-email}")
     public @ResponseBody
     ResponseEntity<String> sendEmailAttachment(@PathVariable("user-email") String email) {
 

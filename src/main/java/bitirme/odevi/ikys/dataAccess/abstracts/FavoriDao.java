@@ -12,10 +12,12 @@ import java.util.List;
 
 public interface FavoriDao extends JpaRepository<Favori,Integer> {
 
-    List<Favori> getFavoriteByIsArayanId(int id);
+    List<Favori> getFavoriByIsArayanId(int id);
 
+//    List<Favorite> getFavoriteByJobSeekerId(int id);
+//
 //    @Transactional
-//    void deleteFavoriteByIsArayanIdAndIsIlaniId(int id);
+//    void deleteFavoriteByJobSeekerIdAndJobAdvertId(int jobSeekerId, int jobAdvertId);
 
 }
 

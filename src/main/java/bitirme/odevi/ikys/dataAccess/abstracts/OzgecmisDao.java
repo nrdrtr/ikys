@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OzgecmisDao extends JpaRepository<Ozgecmis, Integer> {
 
+    Ozgecmis findByIsArayanId(int id);
 }
 
 
