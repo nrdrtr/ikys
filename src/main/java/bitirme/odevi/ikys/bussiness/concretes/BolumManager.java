@@ -1,29 +1,27 @@
 package bitirme.odevi.ikys.bussiness.concretes;
 
 import bitirme.odevi.ikys.bussiness.abstracts.BolumService;
+import bitirme.odevi.ikys.bussiness.rules.DepartmentBussinessRules;
 import bitirme.odevi.ikys.core.utilities.results.*;
 import bitirme.odevi.ikys.dataAccess.abstracts.BolumDao;
 import bitirme.odevi.ikys.entitites.concretes.Bolum;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BolumManager  implements BolumService {
+@AllArgsConstructor
+public class BolumManager implements BolumService {
     private BolumDao bolumDao;
+    private DepartmentBussinessRules departmentBusinessRules;
 
-    @Autowired
-    public BolumManager(BolumDao bolumDao) {
-        this.bolumDao = bolumDao;
-    }
 
     @Override
     public DataResult<List<Bolum>> getAll() {
-        if (this.bolumDao.findAll().isEmpty()) {
-            return new ErrorDataResult<>("Bolum bulunamadı");
-        }
-        return  new SuccessDataResult<>(this.bolumDao.findAll(),"Bolumler Listelendi");
+       this.departmentBusinessRules.isEmptyBolum();
+        return new SuccessDataResult<List<Bolum>>(this.bolumDao.findAll(), "Bölümler başarıyla listelendi!");
     }
 
     @Override

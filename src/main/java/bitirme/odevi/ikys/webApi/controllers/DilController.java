@@ -1,6 +1,6 @@
 package bitirme.odevi.ikys.webApi.controllers;
 
-import bitirme.odevi.ikys.bussiness.abstracts.IDillerService;
+import bitirme.odevi.ikys.bussiness.abstracts.DilService;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.entitites.concretes.Dil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,10 @@ import java.util.List;
 @CrossOrigin
 public class DilController {
 
-    private IDillerService  dillerService;
+    private DilService dillerService;
 
     @Autowired
-    public DilController(IDillerService dillerService) {
+    public DilController(DilService dillerService) {
         super();
         this.dillerService = dillerService;
     }

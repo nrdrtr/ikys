@@ -1,45 +1,35 @@
 package bitirme.odevi.ikys.bussiness.concretes;
 
 import bitirme.odevi.ikys.bussiness.abstracts.EgitimService;
+import bitirme.odevi.ikys.bussiness.rules.EducationBussinessRules;
 import bitirme.odevi.ikys.core.utilities.results.*;
 import bitirme.odevi.ikys.dataAccess.abstracts.EgitimDao;
 import bitirme.odevi.ikys.entitites.concretes.Egitim;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class EgitimManager implements EgitimService {
 
     private EgitimDao egitimDao;
-
-    @Autowired
-    public EgitimManager(EgitimDao egitimDao) {
-        this.egitimDao = egitimDao;
-    }
+    private EducationBussinessRules educationBussinessRules;
 
 
     @Override
     public DataResult<List<Egitim>> egitimGetEgitimByOzgecmisId(int id) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "bitisTarihi");
-        if (this.egitimDao.getEgitimBitisTarihiByOzgecmisId(id, sort).isEmpty()) {
-            return new ErrorDataResult<>("Listelenecek eğitim bilgisi bulunamadı!");
-        } else {
-            return new SuccessDataResult<>(this.egitimDao.getEgitimBitisTarihiByOzgecmisId(id, sort), "Success: Eğitim geçmişi başarıyla sıralanıp listelendi!");
-        }
+        this.educationBussinessRules.sortByEndDate(id);
+        return new SuccessDataResult<>("Eğitim geçmişi başarıyla sıralanıp listelendi!");
     }
+
 
     @Override
     public DataResult<List<Egitim>> egitimGetAll() {
-        if (this.egitimDao.findAll().isEmpty()) {
-            return new ErrorDataResult<>("Warning: Listelenecek bir eğitim bilgisi bulunamadı!");
-        } else {
-            return new SuccessDataResult<>(this.egitimDao.findAll(), "Success: Tüm eğitim bilgileri başarıyla listelendi!");
-        }
+        this.educationBussinessRules.isEmptyEducation();
+        return new SuccessDataResult<>(this.egitimDao.findAll(), "Success: Tüm eğitim bilgileri başarıyla listelendi!");
     }
-
 
     @Override
     public Result save(Egitim egitim) {

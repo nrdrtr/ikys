@@ -5,7 +5,7 @@ import bitirme.odevi.ikys.entitites.concretes.Dil;
 
 import java.util.List;
 
-public interface IDillerService  {
+public interface DilService {
     DataResult<List<Dil>> getDiller();
     DataResult<List<Dil>> add(List<Dil> diller);
 }

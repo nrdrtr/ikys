@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface KullanıcıDao extends JpaRepository<Kullanıcı, Integer> {
 
+    boolean existsByePosta(String ePosta);
 }
 
 

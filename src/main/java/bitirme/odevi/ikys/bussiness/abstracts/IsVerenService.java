@@ -16,5 +16,6 @@ public interface IsVerenService {
 
     List<IsverenWithIsIlanıDto> getIsverenWithIsIlanıDetails();
 
-    //void addPicture(MultipartFile multipartFile) throws IOException;
+    Result uploadPicture(int isverenId, MultipartFile file) throws IOException;
+
 }
