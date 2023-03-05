@@ -7,11 +7,15 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository
-public interface IsArayanDao extends JpaRepository<IsArayan,Integer>     {
+public interface IsArayanDao extends JpaRepository<IsArayan, Integer> {
     IsArayan getIsArayanById(int id);
-     IsArayan findByePosta(String ePosta);
+
+    //IsArayan findByePosta(String ePosta);
+
     @Transactional
     void deleteIsArayanById(int id);
+
+    boolean existsBykimlikNumarasi(String kimlikNumarasi);
 
 
 }

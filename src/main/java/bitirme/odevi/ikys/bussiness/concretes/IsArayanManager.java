@@ -29,6 +29,9 @@ public class IsArayanManager implements IsArayanService {
     public Result save(IsArayan isArayan) {
         this.userBussinessRules.jobSeekerRegistrationCheck(isArayan);
         this.userBussinessRules.isEmailExist(isArayan.getEPosta());
+        this.userBussinessRules.isKimlikNumarasiExist(isArayan.getKimlikNumarasi());
+        this.userBussinessRules.isMailValidator(isArayan);
+
         isArayanDao.save(isArayan);
         return new SuccessResult("Is Arayan Kaydedildi");
     }

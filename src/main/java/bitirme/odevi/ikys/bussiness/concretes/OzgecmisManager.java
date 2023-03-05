@@ -5,6 +5,7 @@ import bitirme.odevi.ikys.core.utilities.results.*;
 import bitirme.odevi.ikys.dataAccess.abstracts.OzgecmisDao;
 import bitirme.odevi.ikys.entitites.concretes.Ozgecmis;
 import bitirme.odevi.ikys.entitites.dto.OzgecmisAddDto;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,20 +14,11 @@ import java.io.IOException;
 
 
 @Service
+@AllArgsConstructor
 public class OzgecmisManager implements OzgecmisService {
 
 
     private final OzgecmisDao ozgecmisDao;
-
-
-
-    @Autowired
-    public OzgecmisManager(OzgecmisDao ozgecmisDao  ) {
-        this.ozgecmisDao = ozgecmisDao;
-
-
-    }
-
 
     @Override
     public Result addOzgecmis(OzgecmisAddDto ozgecmis) {
@@ -61,7 +53,7 @@ public class OzgecmisManager implements OzgecmisService {
 //            return new SuccessResult("Success: Cv başarıyla güncellendi!");
 //        }
         return null;
-   }
+    }
 
     @Override
     public DataResult<Ozgecmis> findByJobSeekerId(int jobseekerId) {
@@ -83,7 +75,7 @@ public class OzgecmisManager implements OzgecmisService {
 //        ref.setResimUrl(url.toString());
 //        this.ozgecmisDao.save(ref);
 //
-       return new SuccessResult("Success: Resim ekleme işlemi başarılı!");
+        return new SuccessResult("Success: Resim ekleme işlemi başarılı!");
     }
 
 

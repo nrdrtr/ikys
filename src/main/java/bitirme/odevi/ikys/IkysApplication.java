@@ -13,6 +13,7 @@ public class IkysApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(IkysApplication.class);
 
+
     public static void main(String[] args) throws IOException {
         logger.info("Application started!");
 

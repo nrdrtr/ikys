@@ -7,22 +7,18 @@ import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
 import bitirme.odevi.ikys.core.utilities.results.SuccessResult;
 import bitirme.odevi.ikys.dataAccess.abstracts.IsPozisyonDao;
 import bitirme.odevi.ikys.entitites.concretes.IsPozisyonu;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+@AllArgsConstructor
 public class IsPozisyonManager implements IsPozisyonService {
 
   private IsPozisyonDao isPozisyonDao;
-
-    @Autowired
-    public IsPozisyonManager(IsPozisyonDao isPozisyonDao) {
-        this.isPozisyonDao = isPozisyonDao;
-    }
-
+  
     @Override
     public DataResult<List<IsPozisyonu>> getIsPozisyonu() {
 

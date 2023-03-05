@@ -1,14 +1,17 @@
 package bitirme.odevi.ikys.bussiness.rules;
 
 import bitirme.odevi.ikys.core.utilities.exceptions.BusinessException;
-
+import bitirme.odevi.ikys.dataAccess.abstracts.IsArayanDao;
+import bitirme.odevi.ikys.dataAccess.abstracts.IsVerenDao;
 import bitirme.odevi.ikys.dataAccess.abstracts.KullanıcıDao;
 import bitirme.odevi.ikys.entitites.concretes.IsArayan;
 import bitirme.odevi.ikys.entitites.concretes.IsVeren;
-
+import bitirme.odevi.ikys.entitites.concretes.Kullanıcı;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Service
@@ -16,6 +19,8 @@ import org.springframework.stereotype.Service;
 public class UserBussinessRules {
 
     private KullanıcıDao kullanıcıDao;
+    private IsArayanDao isArayanDao;
+    private IsVerenDao isVerenDao;
 
     public boolean jobSeekerRegistrationCheck(IsArayan isArayan) {
         if (isArayan.getAdi().isEmpty() || isArayan.getSoyadi().isEmpty() || isArayan.getKimlikNumarasi().isEmpty() || isArayan.getDogumTarihi() == null
@@ -48,7 +53,35 @@ public class UserBussinessRules {
         return true;
     }
 
+
+    public boolean isKimlikNumarasiExist(String kimlikNumarasi) {
+        if (this.isArayanDao.existsBykimlikNumarasi(kimlikNumarasi)) {
+            throw new BusinessException("Bu kimlik numarası zaten kayıtlıdır.");
+        }
+        return true;
+    }
+
+    public boolean isWebSiteExist(String webSite) {
+        if (this.isVerenDao.existsBywebsite(webSite)) {
+            throw new BusinessException("Bu web sitesi zaten kayıtlıdır.");
+        }
+        return true;
+    }
+
+    public boolean isMailValidator(Kullanıcı kullanıcı) {
+
+        String regex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z.]{2,18}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher m = pattern.matcher(kullanıcı.getEPosta());
+        if (m.matches()) {
+            return true;
+        } else {
+            throw new BusinessException("Geçersiz e-posta adresi");
+        }
+
+    }
 }
+
 
 
 

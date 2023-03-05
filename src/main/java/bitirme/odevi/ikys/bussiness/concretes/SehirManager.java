@@ -6,20 +6,18 @@ import bitirme.odevi.ikys.core.utilities.results.ErrorDataResult;
 import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
 import bitirme.odevi.ikys.dataAccess.abstracts.SehirDao;
 import bitirme.odevi.ikys.entitites.concretes.Sehir;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class SehirManager implements SehirService {
 
     private final SehirDao sehirDao;
 
-    @Autowired
-    public SehirManager(SehirDao sehirDao) {
-        this.sehirDao = sehirDao;
-    }
 
     @Override
     public DataResult<List<Sehir>> getAll() {
@@ -27,7 +25,7 @@ public class SehirManager implements SehirService {
             return new SuccessDataResult<>(this.sehirDao.findAll(), "Success: Şehirler başarıyla listelendi!");
         }
 
-        return new ErrorDataResult<>(this.sehirDao.findAll(),"Error: Şehirler listelenemedi!") ;
+        return new ErrorDataResult<>(this.sehirDao.findAll(), "Error: Şehirler listelenemedi!");
     }
 
 

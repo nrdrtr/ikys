@@ -44,6 +44,11 @@ public class IsIlaniManager implements IsIlanıService {
     }
 
     @Override
+    public DataResult<IsIlani> findById(int id) {
+        return new SuccessDataResult<IsIlani>(this.isIlaniDao.findById(id), "iş ilanı id bazlı getirildi");
+    }
+
+    @Override
     public DataResult<List<IsIlani>> getActiveJobAdverts() {
         return null;
     }
@@ -103,5 +108,8 @@ public class IsIlaniManager implements IsIlanıService {
         return this.isIlaniDao.getIsverenWithIsIlanıDetails();
     }
 
-
+    @Override
+    public List<IsIlani> findByIsPozisyonId(int isPozisyonu) {
+        return this.isIlaniDao.findByIsPozisyonuId(isPozisyonu);
+    }
 }

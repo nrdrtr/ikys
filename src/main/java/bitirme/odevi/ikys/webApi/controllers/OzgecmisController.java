@@ -6,6 +6,8 @@ import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.entitites.concretes.Ozgecmis;
 import bitirme.odevi.ikys.entitites.dto.OzgecmisAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,9 +41,13 @@ public class OzgecmisController {
         return this.ozgecmisService.updateOzgecmis(ozgecmis);
     }
 
-    @PostMapping("/addPicture")
-    public Result addPicture(int cvId, MultipartFile file) throws IOException {
-        return this.ozgecmisService.uploadPicture(cvId, file);
+
+    @PostMapping("/addPicture/{cvId}")
+    public ResponseEntity<Result> addPicture(@PathVariable int cvId, @RequestParam("file") MultipartFile file) throws IOException {
+
+        Result result = this.ozgecmisService.uploadPicture(cvId, file);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
 }
 

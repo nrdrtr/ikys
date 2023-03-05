@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class CloudinaryManager {
 
     private Cloudinary cloudinary;
-    private IsVeren isVeren;
+
 
     public CloudinaryManager() {
         cloudinary = new Cloudinary(ObjectUtils.asMap(

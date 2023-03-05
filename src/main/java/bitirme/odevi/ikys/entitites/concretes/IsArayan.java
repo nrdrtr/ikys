@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-@EqualsAndHashCode(callSuper = false)
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "is_arayanlar", uniqueConstraints = {@UniqueConstraint(columnNames = {"kimlik_numarasi"})})
 @PrimaryKeyJoinColumn(name = "kullanici_id", referencedColumnName = "id")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ozgecmis", "favoriler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "favoriler"})
 public class IsArayan extends Kullanıcı {
 
     @Column(name = "adi")

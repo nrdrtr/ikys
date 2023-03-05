@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "favoriler")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","isArayan"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Favori {
 
         @Id

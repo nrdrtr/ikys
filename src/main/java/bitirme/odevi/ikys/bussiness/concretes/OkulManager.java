@@ -6,20 +6,17 @@ import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
 import bitirme.odevi.ikys.dataAccess.abstracts.OkulDao;
 import bitirme.odevi.ikys.entitites.concretes.Okul;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class OkulManager implements OkulService {
 
     private OkulDao okulDao;
-
-    @Autowired
-    public OkulManager(OkulDao okulDao) {
-        this.okulDao = okulDao;
-    }
 
     @Override
     public Result addSchool(Okul okul) {
@@ -28,6 +25,6 @@ public class OkulManager implements OkulService {
 
     @Override
     public DataResult<List<Okul>> getAll() {
-        return  new SuccessDataResult<>(this.okulDao.findAll(),"Okullar getirildi");
+        return new SuccessDataResult<>(this.okulDao.findAll(), "Okullar getirildi");
     }
 }

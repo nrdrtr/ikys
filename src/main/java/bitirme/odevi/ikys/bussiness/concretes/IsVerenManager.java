@@ -21,7 +21,6 @@ public class IsVerenManager implements IsVerenService {
 
     private IsVerenDao isVerenDao;
     private CloudinaryService cloudinaryService;
-
     private UserBussinessRules userBussinessRules;
 
 
@@ -34,6 +33,8 @@ public class IsVerenManager implements IsVerenService {
     public void save(IsVeren isVeren) {
         this.userBussinessRules.employerRegistrationCheck(isVeren);
         this.userBussinessRules.isEmailExist(isVeren.getEPosta());
+        this.userBussinessRules.isWebSiteExist(isVeren.getWebsite());
+        this.userBussinessRules.isMailValidator(isVeren);
         this.isVerenDao.save(isVeren);
 
     }

@@ -4,6 +4,7 @@ import bitirme.odevi.ikys.bussiness.abstracts.IsDeneyimiService;
 import bitirme.odevi.ikys.core.utilities.results.*;
 import bitirme.odevi.ikys.dataAccess.abstracts.IsDeneyimiDao;
 import bitirme.odevi.ikys.entitites.concretes.IsDeneyimi;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -11,14 +12,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class IsDeneyimiManager implements IsDeneyimiService {
 
     private IsDeneyimiDao isDeneyimiDao;
-
-    @Autowired
-    public IsDeneyimiManager(IsDeneyimiDao isDeneyimiDao) {
-        this.isDeneyimiDao = isDeneyimiDao;
-    }
 
     @Override
     public DataResult<List<IsDeneyimi>> getIsDeneyimiByOzgecmisId(int id) {

@@ -18,6 +18,7 @@ public interface IsVerenDao extends JpaRepository<IsVeren, Integer> {
             "From IsVeren i Inner Join i.isIlani il")
     List<IsverenWithIsIlanıDto> getIsverenWithIsIlanıDetails();
 
+    boolean existsBywebsite(String website);
 
     IsVeren getIsVerenById(int id);
 

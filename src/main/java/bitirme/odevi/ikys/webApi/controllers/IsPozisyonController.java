@@ -5,6 +5,7 @@ import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
 import bitirme.odevi.ikys.entitites.concretes.IsPozisyonu;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,14 +22,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/ispozisyonu")
 @CrossOrigin
+@AllArgsConstructor
 public class IsPozisyonController{
 
     private IsPozisyonService isPozisyonService;
 
-    @Autowired
-    public IsPozisyonController(IsPozisyonService isPozisyonService) {
-        this.isPozisyonService = isPozisyonService;
-    }
+
 
     @GetMapping("/getall")
     public DataResult<List<IsPozisyonu>> getIsPozisyonu(){
@@ -36,8 +35,9 @@ public class IsPozisyonController{
     }
 
 
-    @GetMapping("/getBy{isPozisyonuId}")
-    public DataResult<IsPozisyonu> findByIsPozisyonuId(int id){
+
+    @GetMapping("/getBy/{isPozisyonuId}")
+    public DataResult<IsPozisyonu> findByIsPozisyonuId(@PathVariable("isPozisyonuId") int id){
 
        return this.isPozisyonService.findById(id);
     }
