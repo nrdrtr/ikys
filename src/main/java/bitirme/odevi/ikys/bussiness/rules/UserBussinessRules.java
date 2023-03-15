@@ -3,10 +3,9 @@ package bitirme.odevi.ikys.bussiness.rules;
 import bitirme.odevi.ikys.core.utilities.exceptions.BusinessException;
 import bitirme.odevi.ikys.dataAccess.abstracts.IsArayanDao;
 import bitirme.odevi.ikys.dataAccess.abstracts.IsVerenDao;
-import bitirme.odevi.ikys.dataAccess.abstracts.KullanıcıDao;
+import bitirme.odevi.ikys.dataAccess.abstracts.UserDao;
 import bitirme.odevi.ikys.entitites.concretes.IsArayan;
 import bitirme.odevi.ikys.entitites.concretes.IsVeren;
-import bitirme.odevi.ikys.entitites.concretes.Kullanıcı;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ import java.util.regex.Pattern;
 @AllArgsConstructor
 public class UserBussinessRules {
 
-    private KullanıcıDao kullanıcıDao;
+    private UserDao userDao;
     private IsArayanDao isArayanDao;
     private IsVerenDao isVerenDao;
 
@@ -47,7 +46,7 @@ public class UserBussinessRules {
 
     //posta kontrolü
     public boolean isEmailExist(String email) {
-        if (this.kullanıcıDao.existsByePosta(email)) {
+        if (this.userDao.existsByePosta(email)) {
             throw new BusinessException("Bu e-posta adresi zaten kayıtlıdır.");
         }
         return true;
@@ -68,17 +67,29 @@ public class UserBussinessRules {
         return true;
     }
 
-    public boolean isMailValidator(Kullanıcı kullanıcı) {
+    public boolean isMailValidatorIsArayan(IsArayan isArayan) {
 
         String regex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z.]{2,18}$";
         Pattern pattern = Pattern.compile(regex);
-        Matcher m = pattern.matcher(kullanıcı.getEPosta());
+        Matcher m = pattern.matcher(isArayan.getEPosta());
         if (m.matches()) {
             return true;
         } else {
             throw new BusinessException("Geçersiz e-posta adresi");
         }
 
+    }
+
+    public boolean isMailValidatorIsveren(IsVeren isVeren) {
+
+        String regex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.(com|net|org)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher m = pattern.matcher(isVeren.getEPosta());
+        if (m.matches() && m.group().substring(m.group().indexOf("@") + 1).equals(isVeren.getWebsite())) {
+            return true;
+        } else {
+            throw new BusinessException("Geçersiz e-posta adresi");
+        }
     }
 }
 

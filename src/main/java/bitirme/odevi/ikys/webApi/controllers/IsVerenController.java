@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin
 public class IsVerenController {
 
-    private IsVerenService isVerenService;
+    private final IsVerenService isVerenService;
 
     @Autowired
     public IsVerenController(IsVerenService isVerenService) {

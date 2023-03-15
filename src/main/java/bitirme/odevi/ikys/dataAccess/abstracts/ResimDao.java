@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ResimDao extends JpaRepository<Resim, Integer> {
+
+    Resim getByUserId(int userId);
+
 }

@@ -6,6 +6,8 @@ import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -14,7 +16,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Kullanıcı {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,23 +26,29 @@ public class Kullanıcı {
 
     @NotNull
     @Column(name = "e_posta")
+    @Email
+    @NotBlank(message = "ePosta is mandatory")
     private String ePosta;
 
     @NotNull
     @Column(name = "sifre")
+    @NotBlank(message = "sifre is mandatory")
     private String sifre;
 
     @NotNull
     @Column(name = "sifre_tekrari")
+    @NotBlank(message = "sifreTekrari is mandatory")
     private String sifreTekrari;
 
 
     @Column(name = "aktif_mi")
     private boolean aktifMi = false;
 
-    @OneToOne(mappedBy = "kullanıcı", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private Resim resim;
+
+
 
 
 }

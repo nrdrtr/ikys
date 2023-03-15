@@ -2,7 +2,6 @@ package bitirme.odevi.ikys.bussiness.concretes;
 
 import bitirme.odevi.ikys.bussiness.abstracts.IsVerenService;
 import bitirme.odevi.ikys.bussiness.rules.UserBussinessRules;
-import bitirme.odevi.ikys.core.services.CloudinaryService;
 import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.core.utilities.results.SuccessResult;
 import bitirme.odevi.ikys.dataAccess.abstracts.IsVerenDao;
@@ -20,7 +19,6 @@ import java.util.List;
 public class IsVerenManager implements IsVerenService {
 
     private IsVerenDao isVerenDao;
-    private CloudinaryService cloudinaryService;
     private UserBussinessRules userBussinessRules;
 
 
@@ -34,7 +32,7 @@ public class IsVerenManager implements IsVerenService {
         this.userBussinessRules.employerRegistrationCheck(isVeren);
         this.userBussinessRules.isEmailExist(isVeren.getEPosta());
         this.userBussinessRules.isWebSiteExist(isVeren.getWebsite());
-        this.userBussinessRules.isMailValidator(isVeren);
+        this.userBussinessRules.isMailValidatorIsveren(isVeren);
         this.isVerenDao.save(isVeren);
 
     }
@@ -46,12 +44,12 @@ public class IsVerenManager implements IsVerenService {
 
     @Override
     public Result uploadPicture(int isverenId, MultipartFile file) throws IOException {
-        var result = this.cloudinaryService.addPicture(file);
-        var url = result.getData().get("url");
-
-        IsVeren ref = this.isVerenDao.getOne(isverenId);
-        ref.setResimUrl(url.toString());
-        this.isVerenDao.save(ref);
+//        var result = this.cloudinaryService.addPicture(file);
+//        var url = result.getData().get("url");
+//
+//        IsVeren ref = this.isVerenDao.getOne(isverenId);
+//        ref.setResimUrl(url.toString());
+//        this.isVerenDao.save(ref);
 
         return new SuccessResult("Success: Resim ekleme işlemi başarılı!");
     }

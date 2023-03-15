@@ -36,6 +36,7 @@ public class IsIlaniController {
           return this.isIlaniService.findById(id);
 
     }
+
     @GetMapping("/getAllByPage")
     DataResult<List<IsIlani>> getByPage(int pageNo, int pageSize) {
         return this.isIlaniService.getAll(pageNo, pageSize);
@@ -47,7 +48,7 @@ public class IsIlaniController {
     }
 
     @GetMapping("/getBySehir")
-    public DataResult<IsIlani> findBySehir(@RequestParam String sehir) {
+    public DataResult<List<IsIlani>> findBySehir(@RequestParam String sehir) {
         return this.isIlaniService.findBySehir(sehir);
     }
 

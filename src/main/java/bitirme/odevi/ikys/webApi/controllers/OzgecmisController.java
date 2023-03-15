@@ -36,6 +36,7 @@ public class OzgecmisController {
         return this.ozgecmisService.addOzgecmis(ozgecmis);
     }
 
+
     @PutMapping("/updateCv")
     public Result updateCv(@RequestBody OzgecmisAddDto ozgecmis) {
         return this.ozgecmisService.updateOzgecmis(ozgecmis);

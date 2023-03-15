@@ -4,7 +4,6 @@ import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.entitites.concretes.IsIlani;
 import bitirme.odevi.ikys.entitites.dto.IsverenWithIsIlanıDto;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public interface IsIlanıService {
 
     DataResult<IsIlani> findById(int id);
     DataResult<List<IsIlani>> getActiveJobAdverts();
-    DataResult<IsIlani>  findBySehir(String sehir);
+    DataResult<List<IsIlani>>  findBySehir(String sehir);
     DataResult<List<IsIlani>> findAllByIsActiveTrue(boolean isDesc);
     DataResult<List<IsIlani>> getAll(int pageNo, int pageSize);
     Result save(IsIlani isIlani);

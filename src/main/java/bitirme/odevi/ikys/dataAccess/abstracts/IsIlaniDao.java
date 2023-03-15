@@ -17,22 +17,28 @@ import java.util.List;
 @Repository
 public interface IsIlaniDao extends JpaRepository<IsIlani, Integer> {
 
+    //ilanlarını konum, aktiflik, çalışma türü (yarı zamanlı vb.) job postings by city
+//    @Query("SELECT i FROM Ilanlar i \n" +
+//            "JOIN i.sehir s \n" +
+//            "WHERE s.sehirAd = :sehirAd\n")
+//    List<IsIlani>  jobPostingsByCity(String sehir_id);//şehre göre ilan getirme
 
-    IsIlani  findBySehir(String sehir);
-
+    @Query("Select new bitirme.odevi.ikys.entitites.dto.IsverenWithIsIlanıDto"+
+            "(p.id, v.sirketAdi, p.description)" +
+            " From IsVeren v Inner Join  v.isIlani p")//JPQL (Java Persistence Query Language) sorguları yazıyoruz.     //JPQL sorguları SQL sorgularına çevrilir.
+    List<IsverenWithIsIlanıDto> getIsverenWithIsIlanıDetails();
     IsIlani findById(int id);
     //aktifMi
     List<IsIlani> findAllByAktifMiTrue(Sort sort);
+
+
 
     List<IsIlani> findByDescriptionStartsWith(String description);
 
     IsIlani findByDescription(String  description);
 
 
-    @Query("Select new bitirme.odevi.ikys.entitites.dto.IsverenWithIsIlanıDto"+
-            "(p.id, v.sirketAdi, p.description)" +
-            " From IsVeren v Inner Join  v.isIlani p")//JPQL (Java Persistence Query Language) sorguları yazıyoruz.     //JPQL sorguları SQL sorgularına çevrilir.
-    List<IsverenWithIsIlanıDto> getIsverenWithIsIlanıDetails();
+
 
     List<IsIlani> findByIsPozisyonuId(int is_pozisyonu_id);//bir iş poziyonuna ait tüm iş ilanlarını getirir.
 

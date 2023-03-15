@@ -13,6 +13,7 @@ public interface IsArayanService {
 
     Result save(IsArayan isArayan);
 
+  //  DataResult<IsArayan> findByePosta(String ePosta);
     Result deleteIsArayanById(int id);
 
 

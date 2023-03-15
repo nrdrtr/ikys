@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @PrimaryKeyJoinColumn(name = "kullanici_id", referencedColumnName = "id")
-public class IsVeren extends Kullanıcı {
+public class IsVeren extends User {
 
     @Column(name = "sirket_adi")
     @NotNull
@@ -28,10 +28,6 @@ public class IsVeren extends Kullanıcı {
     @Column(name = "telefon_numarasi")
     @NotNull
     private String  telefonNumarasi;
-
-    @Column(name = "resim_url")
-    private  String resimUrl;
-//    private String pictureUrl = "https://res.cloudinary.com/torukobyte/image/upload/v1623515256/customer_rca6tq.png";
 
     @Column(name = "guncel_mi")
     private boolean guncelMi = false;

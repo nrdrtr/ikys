@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,7 +18,7 @@ import java.util.List;
 @Table(name = "is_arayanlar", uniqueConstraints = {@UniqueConstraint(columnNames = {"kimlik_numarasi"})})
 @PrimaryKeyJoinColumn(name = "kullanici_id", referencedColumnName = "id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "favoriler"})
-public class IsArayan extends Kullanıcı {
+public class IsArayan extends User {
 
     @Column(name = "adi")
     @NotNull
@@ -27,15 +26,15 @@ public class IsArayan extends Kullanıcı {
 
     @Column(name = "soyadi")
     @NotNull
-    private String  soyadi;
+    private String soyadi;
 
     @Column(name = "kimlik_numarasi")
     @NotNull
-    private String  kimlikNumarasi;
+    private String kimlikNumarasi;
 
     @Column(name = "dogum_tarihi")
     @NotNull
-    private LocalDate  dogumTarihi;
+    private LocalDate dogumTarihi;
 
     @JsonIgnore
     @OneToMany(mappedBy = "isArayan", cascade = CascadeType.DETACH)

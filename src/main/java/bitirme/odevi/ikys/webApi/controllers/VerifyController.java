@@ -24,4 +24,5 @@ public class VerifyController {
         return isArayanDao.save(isArayan);
 
     }
+
 }

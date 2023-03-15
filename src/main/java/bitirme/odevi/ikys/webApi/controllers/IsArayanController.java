@@ -1,10 +1,11 @@
 package bitirme.odevi.ikys.webApi.controllers;
 
 import bitirme.odevi.ikys.bussiness.abstracts.IsArayanService;
-import bitirme.odevi.ikys.bussiness.concretes.EmailManager;
+//import bitirme.odevi.ikys.bussiness.concretes.EmailManager;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.entitites.concretes.IsArayan;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,19 +17,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/isarayan")
 @CrossOrigin
+@AllArgsConstructor
 public class IsArayanController {
 
     private IsArayanService isArayanService;
 
-    private EmailManager emailManager;
-
-    @Autowired
-    public IsArayanController(IsArayanService isArayanService
-            , EmailManager emailManager) {
-        super();
-        this.isArayanService = isArayanService;
-        this.emailManager = emailManager;
-    }
+   // private EmailManager emailManager;
 
     @GetMapping("/getall")
     public DataResult<List<IsArayan>> getIsArayan() {
@@ -37,6 +31,7 @@ public class IsArayanController {
 
     @PostMapping("/save")
     public Result save(@RequestBody IsArayan isArayan) throws MessagingException, FileNotFoundException {
+        isArayan.setAktifMi(false);
         return this.isArayanService.save(isArayan);
     }
 

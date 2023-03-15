@@ -6,6 +6,7 @@ import bitirme.odevi.ikys.core.utilities.results.*;
 import bitirme.odevi.ikys.dataAccess.abstracts.IsIlaniDao;
 import bitirme.odevi.ikys.entitites.concretes.IsIlani;
 import bitirme.odevi.ikys.entitites.dto.IsverenWithIsIlanıDto;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -14,15 +15,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class IsIlaniManager implements IsIlanıService {
 
-
     private IsIlaniDao isIlaniDao;
-
-    @Autowired
-    public IsIlaniManager(IsIlaniDao isIlaniDao) {
-        this.isIlaniDao = isIlaniDao;
-    }
 
     @Override
     public DataResult<List<IsIlani>> getAll() {
@@ -54,8 +50,9 @@ public class IsIlaniManager implements IsIlanıService {
     }
 
     @Override
-    public DataResult<IsIlani> findBySehir(String sehir) {
-        return new SuccessDataResult<IsIlani>(this.isIlaniDao.findBySehir(sehir), "şehir bazlı iş ilanları listelendi");
+    public DataResult<List<IsIlani>> findBySehir(String sehir) {
+        return null;
+            //    new SuccessDataResult<List<IsIlani>>(this.isIlaniDao.findBysehir_id(sehir), "şehir bazlı iş ilanları listelendi");
     }
 
 

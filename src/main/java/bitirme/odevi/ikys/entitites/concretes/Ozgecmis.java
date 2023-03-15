@@ -1,7 +1,5 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
-
-
 import lombok.*;
 
 import javax.persistence.*;
