@@ -1,7 +1,7 @@
 package bitirme.odevi.ikys.bussiness.rules;
 
 import bitirme.odevi.ikys.core.utilities.exceptions.BusinessException;
-import bitirme.odevi.ikys.dataAccess.abstracts.DilDao;
+import bitirme.odevi.ikys.dataAccess.abstracts.LanguageDao;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class LanguageBussinessRules {
 
-    private DilDao dilDao;
+    private LanguageDao languageDao;
     public void isEmptyLanguage() {
-        if (this.dilDao.findAll().isEmpty()) {
+        if (this.languageDao.findAll().isEmpty()) {
             throw new BusinessException("Dil bulunamadı");
         }
     }

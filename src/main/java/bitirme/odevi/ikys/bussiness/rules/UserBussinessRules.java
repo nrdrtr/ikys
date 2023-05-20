@@ -1,11 +1,11 @@
 package bitirme.odevi.ikys.bussiness.rules;
 
 import bitirme.odevi.ikys.core.utilities.exceptions.BusinessException;
-import bitirme.odevi.ikys.dataAccess.abstracts.IsArayanDao;
-import bitirme.odevi.ikys.dataAccess.abstracts.IsVerenDao;
+import bitirme.odevi.ikys.dataAccess.abstracts.EmployerDao;
+import bitirme.odevi.ikys.dataAccess.abstracts.JobSeekerDao;
 import bitirme.odevi.ikys.dataAccess.abstracts.UserDao;
-import bitirme.odevi.ikys.entitites.concretes.IsArayan;
-import bitirme.odevi.ikys.entitites.concretes.IsVeren;
+import bitirme.odevi.ikys.entitites.concretes.Employer;
+import bitirme.odevi.ikys.entitites.concretes.JobSeeker;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,60 +18,56 @@ import java.util.regex.Pattern;
 public class UserBussinessRules {
 
     private UserDao userDao;
-    private IsArayanDao isArayanDao;
-    private IsVerenDao isVerenDao;
+    private JobSeekerDao jobseekerDao;
+    private EmployerDao employerDao;
 
-    public boolean jobSeekerRegistrationCheck(IsArayan isArayan) {
-        if (isArayan.getAdi().isEmpty() || isArayan.getSoyadi().isEmpty() || isArayan.getKimlikNumarasi().isEmpty() || isArayan.getDogumTarihi() == null
-                || isArayan.getEPosta().isEmpty() || isArayan.getSifre().isEmpty() || isArayan.getSifreTekrari().isEmpty()) {
-
-            throw new BusinessException("Tüm alanlar zorunludur. Lütfen tekrar deneyin.");
-        }
-        return true;
-
-    }
-
-    public boolean employerRegistrationCheck(IsVeren isVeren) {//şirket adı, web sitesi, e-posta, telefon, şifre ve şifre tekrarı bilgileri
-        if (isVeren.getSirketAdi().isEmpty() || isVeren.getWebsite().isEmpty()
-                || isVeren.getEPosta().isEmpty() || isVeren.getTelefonNumarasi().isEmpty()
-                || isVeren.getSifre().isEmpty() || isVeren.getSifreTekrari().isEmpty()) {
+    public void jobSeekerRegistrationCheck(JobSeeker jobseeker) {
+        if (jobseeker.getName().isEmpty() || jobseeker.getSurname().isEmpty() || jobseeker.getIdentityNumber().isEmpty() || jobseeker.getBirhtDate() == null
+                || jobseeker.getEmail().isEmpty() || jobseeker.getPassword().isEmpty() || jobseeker.getPasswordAgain().isEmpty()) {
 
             throw new BusinessException("Tüm alanlar zorunludur. Lütfen tekrar deneyin.");
-        } else {
-
-            return true;
         }
 
     }
 
-    //posta kontrolü
-    public boolean isEmailExist(String email) {
-        if (this.userDao.existsByePosta(email)) {
+    public void employerRegistrationCheck(Employer employer) {//şirket adı, web sitesi, e-posta, telefon, şifre ve şifre tekrarı bilgileri
+        if (employer.getCompanyName().isEmpty() || employer.getWebsite().isEmpty()
+                || employer.getEmail().isEmpty() || employer.getPhoneNumber().isEmpty()
+                || employer.getPassword().isEmpty() || employer.getPasswordAgain().isEmpty()) {
+
+            throw new BusinessException("Tüm alanlar zorunludur. Lütfen tekrar deneyin.");
+        }
+
+    }
+
+
+    public void isEmailExist(String email) {
+        if (this.userDao.existsByemail(email)) {
             throw new BusinessException("Bu e-posta adresi zaten kayıtlıdır.");
         }
-        return true;
+
     }
 
 
-    public boolean isKimlikNumarasiExist(String kimlikNumarasi) {
-        if (this.isArayanDao.existsBykimlikNumarasi(kimlikNumarasi)) {
+    public void isIdentityNumberExist(String kimlikNumarasi) {
+        if (this.jobseekerDao.existsByIdentityNumber(kimlikNumarasi)) {
             throw new BusinessException("Bu kimlik numarası zaten kayıtlıdır.");
         }
-        return true;
+
     }
 
     public boolean isWebSiteExist(String webSite) {
-        if (this.isVerenDao.existsBywebsite(webSite)) {
+        if (this.employerDao.existsBywebsite(webSite)) {
             throw new BusinessException("Bu web sitesi zaten kayıtlıdır.");
         }
         return true;
     }
 
-    public boolean isMailValidatorIsArayan(IsArayan isArayan) {
+    public boolean isMailValidatorIsArayan(JobSeeker jobseeker) {
 
         String regex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z.]{2,18}$";
         Pattern pattern = Pattern.compile(regex);
-        Matcher m = pattern.matcher(isArayan.getEPosta());
+        Matcher m = pattern.matcher(jobseeker.getEmail());
         if (m.matches()) {
             return true;
         } else {
@@ -80,16 +76,17 @@ public class UserBussinessRules {
 
     }
 
-    public boolean isMailValidatorIsveren(IsVeren isVeren) {
+    public boolean isMailValidatorIsveren(Employer employer) {
 
-        String regex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.(com|net|org)$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher m = pattern.matcher(isVeren.getEPosta());
-        if (m.matches() && m.group().substring(m.group().indexOf("@") + 1).equals(isVeren.getWebsite())) {
-            return true;
-        } else {
-            throw new BusinessException("Geçersiz e-posta adresi");
-        }
+//        String regex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.(com|net|org)$";
+//        Pattern pattern = Pattern.compile(regex);
+//        Matcher m = pattern.matcher(employer.getEmail());
+//        if (m.matches() && m.group().substring(m.group().indexOf("@") + 1).equals(employer.getWebsite())) {
+//            return true;
+//        } else {
+//            throw new BusinessException("Geçersiz e-posta adresi");
+//        }
+ return true;
     }
 }
 

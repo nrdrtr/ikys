@@ -1,7 +1,7 @@
 package bitirme.odevi.ikys.webApi.controllers;
 
-import bitirme.odevi.ikys.dataAccess.abstracts.IsArayanDao;
-import bitirme.odevi.ikys.entitites.concretes.IsArayan;
+import bitirme.odevi.ikys.dataAccess.abstracts.JobSeekerDao;
+import bitirme.odevi.ikys.entitites.concretes.JobSeeker;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class VerifyController {
     @Autowired
-    private IsArayanDao isArayanDao;
+    private JobSeekerDao jobseekerDao;
 
 
     @GetMapping("/verify")
-    public IsArayan verify(@RequestParam Long token) {
-        IsArayan isArayan = isArayanDao.getIsArayanById(token.intValue());
-        isArayan.setAktifMi(true);
-        return isArayanDao.save(isArayan);
+    public JobSeeker verify(@RequestParam Long token) {
+        JobSeeker jobseeker = jobseekerDao.getJobSeekerById(token.intValue());
+      //  jobseeker.setActive(true);
+        return jobseekerDao.save(jobseeker);
 
     }
 
