@@ -4,6 +4,8 @@ package bitirme.odevi.ikys.dataAccess.abstracts;
 import bitirme.odevi.ikys.entitites.concretes.JobAdvertisement;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,17 +14,25 @@ import java.util.List;
 public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Integer> {
 
     //ilanlarını konum, aktiflik, çalışma türü (yarı zamanlı vb.) job postings by city
-//    @Query("SELECT i FROM Ilanlar i \n" +
-//            "JOIN i.sehir s \n" +
-//            "WHERE s.sehirAd = :sehirAd\n")
-//    List<JobAdvertisement>  jobPostingsByCity(String sehir_id);//şehre göre ilan getirme
+    @Query("SELECT ja FROM JobAdvertisement ja JOIN ja.city c WHERE c.cityName = :cityName")
+    List<JobAdvertisement> findByCityName(@Param("cityName") String cityName);
 
-//    @Query("Select new bitirme.odevi.ikys.entitites.dto.EmployerWithJobAdvertisementDto"+
+
+  //  List<JobApplicationDTO> getApplicationsByJobAdvertisement(int id);
+    //@Query("SELECT a.applications FROM JobAdvertisement a WHERE a.id = :id")
+   // List<Application> getApplicationsByJobAdvertisement(@Param("id") int id);
+
+
+    //List<JobAdvertisement>  findByCity(String city);//şehre göre ilan getirme
+
+//    @Query("Select new bitirme.odevi.ikys.entitites.dto.EmployerJobAdvertisementsRequest"+
 //            "(p.id, v.sirketAdi, p.description)" +
 //            " From Employer v Inner Join  v.isIlani p")//JPQL (Java Persistence Query Language) sorguları yazıyoruz.     //JPQL sorguları SQL sorgularına çevrilir.
  // List<IsverenWithIsIlanıDto> getIsverenWithIsIlanıDetails();
-   ///List<EmployerWithJobAdvertisementDto> getEmployerWithJobAdvertisementDetails();
+   ///List<EmployerJobAdvertisementsRequest> getEmployerWithJobAdvertisementDetails();
     JobAdvertisement findById(int id);
+
+    List<JobAdvertisement> findByEmployerId(int employerId);//employer id ye göre ilanları listeleme
 
     List<JobAdvertisement> findAllByActiveTrue(Sort sort);
 
@@ -61,7 +71,7 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 //    @Query("Update JobAdvert set isConfirmed =:confirm where id =:jobAdvertId")
 //    void changeIsConfirmed(boolean confirm, int jobAdvertId);
 //
-//    JobAdvert getJobAdvertById(int id);
+
 //
 //    @Transactional
 //    void deleteJobAdvertById(int id);

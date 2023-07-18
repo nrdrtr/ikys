@@ -1,6 +1,7 @@
 package bitirme.odevi.ikys.core.utilities.exceptions;
 
-public class ResourceNotFoundException extends RuntimeException {
-    public ResourceNotFoundException(String type, String id, Integer typeId) {
+public class ResourceNotFoundException extends Exception {
+    public ResourceNotFoundException(String message) {
+        super(message);
     }
 }

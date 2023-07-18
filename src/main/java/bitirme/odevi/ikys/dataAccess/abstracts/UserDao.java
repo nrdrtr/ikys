@@ -18,6 +18,9 @@ public interface UserDao extends JpaRepository<User, Integer> {
     Optional<Employer> findOneByEmailAndPassword(String email, String password);
 
 
+    User getUserById(int id);
+
+
 }
 
 

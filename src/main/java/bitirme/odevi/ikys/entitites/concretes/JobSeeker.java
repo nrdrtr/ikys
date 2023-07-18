@@ -1,11 +1,13 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
-import lombok.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,10 +19,8 @@ import java.util.List;
 @Entity
 @Table(name = "jobseekers", uniqueConstraints = {@UniqueConstraint(columnNames = {"identity_number"})})
 @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "favorites","curriculumVitaes"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "favorites", "applications", "curriculumVitaes"})
 public class JobSeeker extends User {
-
-
 
     @Column(name = "name")
     @NotNull
@@ -34,19 +34,18 @@ public class JobSeeker extends User {
     @NotNull
     private String identityNumber;
 
-    @Column(name = "user_type")
-    private String userType;
-
     @Column(name = "birth_date")
     @NotNull
-    private LocalDate birhtDate;
+    private LocalDate birthDate;
 
+    @OneToMany(mappedBy = "jobSeeker", fetch = FetchType.LAZY)
+    private List<Application> applications;
 
-
-    @JsonIgnore
     @OneToMany(mappedBy = "jobSeeker", cascade = CascadeType.DETACH)
     private List<CurriculumVitae> curriculumVitaes;
 
     @OneToMany(mappedBy = "jobSeeker", cascade = CascadeType.DETACH)
     private List<Favorite> favorites;
+
+
 }

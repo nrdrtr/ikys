@@ -1,14 +1,15 @@
 package bitirme.odevi.ikys.bussiness.concretes;
 
 import bitirme.odevi.ikys.bussiness.abstracts.UserService;
+import bitirme.odevi.ikys.bussiness.requests.UserSaveRequest;
 import bitirme.odevi.ikys.core.mail.EmailService;
+import bitirme.odevi.ikys.core.utilities.mapper.ModelMapperService;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
 import bitirme.odevi.ikys.dataAccess.abstracts.UserDao;
 import bitirme.odevi.ikys.entitites.concretes.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class UserServiceManager implements UserService {
 
 
     private UserDao userDao;
+    private ModelMapperService modelMapperService;
 
 
     // private ConfirmationTokenDao confirmationTokenDao;
@@ -42,29 +44,39 @@ public class UserServiceManager implements UserService {
 
 
     @Override
-    public ResponseEntity<?> saveUser(User user) {
+    public User saveUser(UserSaveRequest userSaveRequest) {
 
-        if (userDao.existsByemail(user.getEmail())) {
-            return ResponseEntity.badRequest().body("Error: Email is already in use!");
-        }
-
+        User user = modelMapperService.forRequest().map(userSaveRequest, User.class);
+        return userDao.save(user);
 
 
-        userDao.save(user);
+
+
+
+
+//        if (userDao.existsByemail(user.getEmail())) {
+//            return ResponseEntity.badRequest().body("Error: Email is already in use!");
+//        }
+//
+        //mapper
+
+
+
+
 
        // Token confirmationToken = new Token();
         // confirmationTokenDao.save(confirmationToken);
 
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(user.getEmail());
-        mailMessage.setSubject("Complete Registration!");
-        //mailMessage.setText("To confirm your account, please click here : "
-        //        + "http://localhost:8085/confirm-account?token=" + confirmationToken.getConfirmationToken());
-        emailService.sendEmail(mailMessage);
-
-        // System.out.println("Confirmation Token: " + confirmationToken.getConfirmationToken());
-
-        return ResponseEntity.ok("Verify email by the link sent on your email address");
+//        SimpleMailMessage mailMessage = new SimpleMailMessage();
+//        mailMessage.setTo(user.getEmail());
+//        mailMessage.setSubject("Complete Registration!");
+//        //mailMessage.setText("To confirm your account, please click here : "
+//        //        + "http://localhost:8085/confirm-account?token=" + confirmationToken.getConfirmationToken());
+//        emailService.sendEmail(mailMessage);
+//
+//        // System.out.println("Confirmation Token: " + confirmationToken.getConfirmationToken());
+//
+//        return ResponseEntity.ok("Verify email by the link sent on your email address");
     }
 
 

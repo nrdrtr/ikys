@@ -1,10 +1,10 @@
 package bitirme.odevi.ikys.dataAccess.abstracts;
 
 import bitirme.odevi.ikys.entitites.concretes.Technology;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository

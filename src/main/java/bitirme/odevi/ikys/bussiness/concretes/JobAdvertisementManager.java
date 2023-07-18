@@ -1,16 +1,21 @@
 package bitirme.odevi.ikys.bussiness.concretes;
 
 
+import bitirme.odevi.ikys.bussiness.abstracts.ApplicationService;
 import bitirme.odevi.ikys.bussiness.abstracts.JobAdvertisementService;
+import bitirme.odevi.ikys.bussiness.requests.EmployerJobAdvertisementsRequest;
+import bitirme.odevi.ikys.bussiness.requests.JobApplicationDTO;
+import bitirme.odevi.ikys.core.utilities.mapper.ModelMapperService;
 import bitirme.odevi.ikys.core.utilities.results.*;
+import bitirme.odevi.ikys.dataAccess.abstracts.ApplicationDao;
 import bitirme.odevi.ikys.dataAccess.abstracts.JobAdvertisementDao;
-import bitirme.odevi.ikys.entitites.concretes.JobAdvertisement;
-import bitirme.odevi.ikys.entitites.dto.EmployerWithJobAdvertisementDto;
+import bitirme.odevi.ikys.entitites.concretes.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,6 +23,37 @@ import java.util.List;
 public class JobAdvertisementManager implements JobAdvertisementService {
 
     private JobAdvertisementDao jobAdvertisementDao;
+    private ModelMapperService modelMapperService;
+
+
+    @Override
+    public List<JobApplicationDTO> getApplicantsByJobAdvertisement(int id) {
+        JobAdvertisement jobAdvertisement = jobAdvertisementDao.findById(id);
+
+        if (jobAdvertisement == null) {
+
+            return new ArrayList<>();
+        }
+
+        List<JobApplicationDTO> applicants = new ArrayList<>();
+        List<Application> applications = jobAdvertisement.getApplications();
+
+        for (Application application : applications) {
+
+            try {
+                JobApplicationDTO dto = this.modelMapperService.forRequest().map(application.getJobSeeker(), JobApplicationDTO.class);
+                applicants.add(dto);
+            } catch (Exception e) {
+                // Hata mesajını ve ayrıntılarını yazdırabilir veya loglayabilirsiniz
+                e.printStackTrace();
+            }
+
+
+        }
+
+        return applicants;
+    }
+
 
     @Override
     public DataResult<List<JobAdvertisement>> getAll() {
@@ -39,6 +75,24 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     @Override
+    public List<JobAdvertisement> findByEmployerId(int employerId) {
+        return this.jobAdvertisementDao.findByEmployerId(employerId);
+    }
+
+
+
+    @Override
+    public Result save(EmployerJobAdvertisementsRequest employerJobAdvertisementsRequest) throws Exception {
+
+        JobAdvertisement advertisement = this.modelMapperService.forRequest().map(employerJobAdvertisementsRequest, JobAdvertisement.class);
+        System.out.print("------------------" + advertisement.getEmployer());
+
+        this.jobAdvertisementDao.save(advertisement);
+        return new SuccessResult("Data Kaydedildi");
+
+    }
+
+    @Override
     public DataResult<List<JobAdvertisement>> getAllByIsActiveTrue() {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAllByActiveTrue(), "aktif iş ilanları listelendi");
     }
@@ -48,10 +102,10 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.findById(id), "iş ilanı id bazlı getirildi");
     }
 
+
     @Override
-    public DataResult<List<JobAdvertisement>> findBySehir(String sehir) {
-        return null;
-            //    new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findBysehir_id(sehir), "şehir bazlı iş ilanları listelendi");
+    public List<JobAdvertisement> findByCityName(String cityName) {
+        return this.jobAdvertisementDao.findByCityName(cityName);
     }
 
 
@@ -84,25 +138,29 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     @Override
-    public Result save(JobAdvertisement jobAdvertisement) {
-        this.jobAdvertisementDao.save(jobAdvertisement);
-        return new SuccessResult("İş ilanı eklendi");
+    public Result setStatus(int jobAdvertisementId, int employerId, boolean status) {
+        List<JobAdvertisement> jobAdvertisements = this.jobAdvertisementDao.findByEmployerId(employerId);
+
+        for(JobAdvertisement jobAdvertisement:jobAdvertisements) {
+            if(jobAdvertisementId == jobAdvertisement.getId()) {
+                jobAdvertisement.setActive(status);
+                this.jobAdvertisementDao.save(jobAdvertisement);
+                return new SuccessResult("Statü değiştirildi");
+            }
+        }
+
+        return null;
     }
+
+//    @Override
+//    public Result save(JobAdvertisement jobAdvertisement) {
+//        this.jobAdvertisementDao.save(jobAdvertisement);
+//        return new SuccessResult("İş ilanı eklendi");
+//    }
 
     @Override
     public List<JobAdvertisement> findByDescriptionStartsWith(String explanation) {
         return this.jobAdvertisementDao.findByExplanationStartsWith(explanation);
-    }
-
-    @Override
-    public JobAdvertisement findByDescription(String explanation) {
-        return this.jobAdvertisementDao.findByExplanation(explanation);
-    }
-
-    @Override
-    public List<EmployerWithJobAdvertisementDto> getIsverenWithIsIlanıDetails() {
-        return null;
-                //this.jobAdvertisementDao.getIsverenWithIsIlanıDetails();
     }
 
     @Override

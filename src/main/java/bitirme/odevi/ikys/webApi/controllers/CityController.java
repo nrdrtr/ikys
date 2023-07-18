@@ -18,8 +18,6 @@ public class CityController {
 
     private CityService cityService;
 
-
-
     @GetMapping("/getall")
     public DataResult<List<City>> getAll(){
         return this.cityService.getAll();

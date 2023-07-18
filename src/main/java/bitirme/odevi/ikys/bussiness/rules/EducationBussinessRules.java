@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+
 @AllArgsConstructor
 @Service
 public class EducationBussinessRules {
@@ -19,7 +20,7 @@ public class EducationBussinessRules {
     }
 
     public void sortByEndDate(int id) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "bitisTarihi");
+        Sort sort = Sort.by(Sort.Direction.DESC, "endDate");
         if (this.educationDao.getEducationEndDateByCurriculumVitaeId(id, sort).isEmpty()) {
             throw new BusinessException("Eğitim bulunamadı");
         } else {

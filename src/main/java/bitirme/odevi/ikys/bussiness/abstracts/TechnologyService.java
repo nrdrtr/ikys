@@ -3,7 +3,7 @@ package bitirme.odevi.ikys.bussiness.abstracts;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.entitites.concretes.Technology;
-import bitirme.odevi.ikys.entitites.dto.TechnologyUpdateDto;
+import bitirme.odevi.ikys.bussiness.requests.curriculumRequests.TechnologyUpdateDto;
 
 import java.util.List;
 
