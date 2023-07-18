@@ -1,10 +1,10 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
 
 @Getter
 @Setter

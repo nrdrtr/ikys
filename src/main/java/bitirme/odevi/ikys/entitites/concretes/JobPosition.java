@@ -1,10 +1,13 @@
 package bitirme.odevi.ikys.entitites.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
-import lombok.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -24,6 +27,8 @@ public class JobPosition {
     @Column(name = "job_name")
     @NotNull
     private String jobName;
+
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "jobPosition",cascade=CascadeType.ALL)

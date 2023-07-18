@@ -2,13 +2,12 @@ package bitirme.odevi.ikys.entitites.concretes;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
@@ -23,7 +22,6 @@ public class JobExperience {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private int id;
 
     @Column(name = "company_name")
@@ -33,15 +31,19 @@ public class JobExperience {
     private String positionName;
 
     @Column(name = "start_date")
-    @NotNull
     private LocalDate startDate;
 
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne()
     @JoinColumn(name = "curriculumVitae_id")
     private CurriculumVitae curriculumVitae;
+
+    @JsonIgnoreProperties({"firstName","surname","email","password","identityNumber","birthDate"})
+    @ManyToOne()
+    @JoinColumn(name = "jobseeker_id")
+    private JobSeeker jobSeeker;
 }
 
 

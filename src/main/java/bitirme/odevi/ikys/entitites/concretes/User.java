@@ -2,15 +2,13 @@ package bitirme.odevi.ikys.entitites.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
 @Getter
 @Setter
 @Entity
@@ -24,7 +22,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    @NotNull
     private int id;
 
     @NotNull
@@ -32,10 +29,17 @@ public class User {
     @NotBlank(message = "ePosta is mandatory")
     private String email;
 
+
+    @Column(name = "user_type")
+    private String userType;
+
     @NotNull
     @Column(name = "password")
     @NotBlank(message = "sifre is mandatory")
     private String password;
+
+    @Column(name = "is_verified", columnDefinition = "boolean default false")
+    private boolean isVerified;
 
     @NotNull
     @Column(name = "password_again")

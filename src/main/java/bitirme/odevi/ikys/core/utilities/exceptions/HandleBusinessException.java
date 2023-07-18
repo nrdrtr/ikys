@@ -17,4 +17,12 @@ public class HandleBusinessException {
         problemDetails.setMessage(businessException.getMessage());
         return problemDetails;
     }
+
+    @ExceptionHandler
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public ProblemDetails handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
+        ProblemDetails problemDetails = new ProblemDetails();
+        problemDetails.setMessage(resourceNotFoundException.getMessage());
+        return problemDetails;
+    }
 }

@@ -7,7 +7,7 @@ import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
 import bitirme.odevi.ikys.core.utilities.results.SuccessResult;
 import bitirme.odevi.ikys.dataAccess.abstracts.TechnologyDao;
 import bitirme.odevi.ikys.entitites.concretes.Technology;
-import bitirme.odevi.ikys.entitites.dto.TechnologyUpdateDto;
+import bitirme.odevi.ikys.bussiness.requests.curriculumRequests.TechnologyUpdateDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

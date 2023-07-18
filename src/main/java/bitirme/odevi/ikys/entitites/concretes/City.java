@@ -2,10 +2,13 @@ package bitirme.odevi.ikys.entitites.concretes;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
-import lombok.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -16,7 +19,6 @@ import java.util.List;
 @NoArgsConstructor(force = true)
 public class City {
      @Id
-     @NotNull
      @Column(name = "id")
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      private int id;

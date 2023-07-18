@@ -12,8 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 
-@RestController
-@AllArgsConstructor
+@RestController@AllArgsConstructor
 @RequestMapping("/api/resimler")
 public class ImageController {
 
@@ -45,7 +44,7 @@ public class ImageController {
 
     @DeleteMapping("/delete")
     public Result delete(@RequestParam int id) {
-        return resimService.delete(id);
+        return this.resimService.delete(id);
     }
 
 

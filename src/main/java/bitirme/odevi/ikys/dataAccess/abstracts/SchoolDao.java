@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SchoolDao extends JpaRepository<School, Integer> {
+//    List<School> findAllByJobSeekerIdOrderBySchoolGraduationDateDesc(int employeeId);
+
 
 }
 

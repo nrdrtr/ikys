@@ -1,5 +1,6 @@
 package bitirme.odevi.ikys.bussiness.abstracts;
 
+import bitirme.odevi.ikys.bussiness.requests.UserSaveRequest;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.entitites.concretes.User;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ public interface UserService {
 
     DataResult<User> getByEmail(String email);
 
-    ResponseEntity<?> saveUser(User user);
+    User saveUser(UserSaveRequest userSaveRequest);
 
     ResponseEntity<?> confirmEmail(String confirmationToken);
 

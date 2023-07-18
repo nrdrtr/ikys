@@ -2,10 +2,11 @@ package bitirme.odevi.ikys.entitites.concretes;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -13,22 +14,26 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "social_medias")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "curriculumVitae"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobSeeker"})
 public class SocialMedia {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private int id;
 
-    @Column(name = "github_username")
-    private String githubUsername;
 
-    @Column(name = "linkedin_username")
-    private String linkedinUsername;
+    @Column(name = "social_media_name")
+    private String socialMediaName;
 
-    @OneToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "cv_id")
-    private CurriculumVitae curriculumVitae;
+//
+//    @JsonIgnoreProperties({"firstName", "surname", "email", "password", "identityNumber", "birthDate"})
+//    @ManyToOne()
+//    @JoinColumn(name = "jobseeker_id")
+//    private JobSeeker jobSeeker;
+
+    //@OneToOne(cascade = CascadeType.DETACH)
+//    @JoinColumn(name = "cv_id")
+//    private CurriculumVitae curriculumVitae;
+
 }

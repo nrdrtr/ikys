@@ -2,13 +2,13 @@ package bitirme.odevi.ikys.entitites.concretes;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -32,13 +32,8 @@ public class Employer extends User {
     @NotNull
     private String  phoneNumber;
 
-    @Column(name = "user_type")
-    private String userType;
-
     @Column(name = "is_current")
     private boolean isCurrent = false;
-
-
 
     @JsonIgnore
     @OneToMany(mappedBy = "employer")

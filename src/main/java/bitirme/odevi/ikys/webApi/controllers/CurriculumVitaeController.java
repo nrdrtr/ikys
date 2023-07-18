@@ -4,51 +4,63 @@ import bitirme.odevi.ikys.bussiness.abstracts.CurriculumVitaeService;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.entitites.concretes.CurriculumVitae;
-import bitirme.odevi.ikys.entitites.dto.OzgecmisAddDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/ozgecmis")
+@AllArgsConstructor
+@RequestMapping("/api/resumes")
 public class CurriculumVitaeController {
 
     private CurriculumVitaeService curriculumVitaeService;
 
-    @Autowired
-    public CurriculumVitaeController(CurriculumVitaeService curriculumVitaeService) {
-        this.curriculumVitaeService = curriculumVitaeService;
-    }
-
-
     @GetMapping("/getCvWithJobSeekerId")
     public DataResult<CurriculumVitae> findCvByJobSeekerId(int jobseekerId) {
-        return this.curriculumVitaeService.findByJobSeekerId(jobseekerId);
-    }
-
-    @PostMapping("/addCv")
-    public Result addCv(@RequestBody OzgecmisAddDto ozgecmis) {
-        return this.curriculumVitaeService.addOzgecmis(ozgecmis);
+        return this.curriculumVitaeService.getByJobSeekerId(jobseekerId);
     }
 
 
-    @PutMapping("/updateCv")
-    public Result updateCv(@RequestBody OzgecmisAddDto ozgecmis) {
-        return this.curriculumVitaeService.updateOzgecmis(ozgecmis);
+    @PostMapping("/add")
+    public Result add(@RequestBody CurriculumVitae curriculumVitae) {
+        return this.curriculumVitaeService.add(curriculumVitae);
     }
 
 
-    @PostMapping("/addPicture/{cvId}")
-    public ResponseEntity<Result> addPicture(@PathVariable int cvId, @RequestParam("file") MultipartFile file) throws IOException {
-
-        Result result = this.curriculumVitaeService.uploadPicture(cvId, file);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    @DeleteMapping("/delete")
+    public Result delete(@RequestParam int id) {
+        return this.curriculumVitaeService.delete(id);
     }
+
+
+    @GetMapping("/getall")
+    public DataResult<List<CurriculumVitae>> getAll() {
+        return this.curriculumVitaeService.getAll();
+    }
+
+    @GetMapping("/getByEmployeeId")
+    DataResult<CurriculumVitae> getByEmployeeId(@RequestParam int employeeId) {
+        return this.curriculumVitaeService.getByJobSeekerId(employeeId);
+    }
+
+    //    @PutMapping("/update")
+//    public Result update(@RequestBody CurriculumVitae resume) {
+//        return this.curriculumVitaeService.update(resume);
+//    }
+    //    @GetMapping("/getById")
+//    public DataResult<CurriculumVitae> getById(@RequestParam int id){
+//        return this.curriculumVitaeService.getById(id);
+//    }
+
+
+//    @PostMapping("/addPicture/{cvId}")
+//    public ResponseEntity<Result> addPicture(@PathVariable int cvId, @RequestParam("file") MultipartFile file) throws IOException {
+//
+//        Result result = this.curriculumVitaeService.uploadPicture(cvId, file);
+//        return new ResponseEntity<>(result, HttpStatus.OK);
+//    }
 
 }
 

@@ -55,14 +55,12 @@ public class ImageManager implements ImageService {
     @Override
     public Result delete(int id) {
 
-        Image image = getById(id).getData();
-
-        String[] splitImageUrlArray = image.getImageUrl().split("/");
-        int indexOfExtension = splitImageUrlArray[splitImageUrlArray.length - 1].indexOf(".");
-        String publicIdOfImage = splitImageUrlArray[splitImageUrlArray.length - 1].substring(0, indexOfExtension);
-
-        cloudStorageService.delete(publicIdOfImage);
-        resimDao.deleteById(id);
+//        Image image = getById(id).getData();
+//        String[] splitImageUrlArray = image.getImageUrl().split("/");
+//        int indexOfExtension = splitImageUrlArray[splitImageUrlArray.length - 1].indexOf(".");
+//        String publicIdOfImage = splitImageUrlArray[splitImageUrlArray.length - 1].substring(0, indexOfExtension);
+ //        cloudStorageService.delete(publicIdOfImage);
+        this.resimDao.deleteById(id);
         return new SuccessResult("Resim silindi.");
     }
 

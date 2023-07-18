@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetAllResponseSchools {
-
+    private int id;
     private String schoolName;
 }

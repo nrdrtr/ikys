@@ -1,15 +1,18 @@
 package bitirme.odevi.ikys.webApi.controllers;
 
 import bitirme.odevi.ikys.bussiness.abstracts.JobPositionService;
+import bitirme.odevi.ikys.bussiness.requests.JobPositionAddRequest;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
-import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.entitites.concretes.JobPosition;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -58,13 +61,11 @@ public class JobPositionController {
     }
 
 
-
-
-
-
-
     @PostMapping("/add")
-    public Result addIsPoziyonu(JobPosition jobPosition){
-        return this.jobPositionService.addIsPozisyonu(jobPosition);
+    public ResponseEntity<?> addJobPosition(@RequestBody JobPositionAddRequest positionAddRequest   ){
+        Map<String, Object> map = new LinkedHashMap<>();
+        this.jobPositionService.save(positionAddRequest);
+        map.put("message", "Record is Saved Successfully!");
+        return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 }

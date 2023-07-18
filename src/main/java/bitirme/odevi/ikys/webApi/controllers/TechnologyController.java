@@ -4,7 +4,7 @@ import bitirme.odevi.ikys.bussiness.abstracts.TechnologyService;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.entitites.concretes.Technology;
-import bitirme.odevi.ikys.entitites.dto.TechnologyUpdateDto;
+import bitirme.odevi.ikys.bussiness.requests.curriculumRequests.TechnologyUpdateDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

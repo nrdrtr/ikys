@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface CurriculumVitaeDao extends JpaRepository<CurriculumVitae, Integer> {
 
     CurriculumVitae findByJobSeekerId(int id);
+
 }
 
 

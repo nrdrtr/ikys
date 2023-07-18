@@ -1,6 +1,8 @@
 package bitirme.odevi.ikys.bussiness.concretes;
 
 import bitirme.odevi.ikys.bussiness.abstracts.JobPositionService;
+import bitirme.odevi.ikys.bussiness.requests.JobPositionAddRequest;
+import bitirme.odevi.ikys.core.utilities.mapper.ModelMapperService;
 import bitirme.odevi.ikys.core.utilities.results.DataResult;
 import bitirme.odevi.ikys.core.utilities.results.Result;
 import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
@@ -20,6 +22,7 @@ import java.util.List;
 public class JobPositionManager implements JobPositionService {
 
     private JobPositionDao jobPositionDao;
+    private ModelMapperService modelMapperService;
   
     @Override
     public DataResult<List<JobPosition>> getIsPozisyonu() {
@@ -27,17 +30,19 @@ public class JobPositionManager implements JobPositionService {
         return new SuccessDataResult<>(this.jobPositionDao.findAll()  , "İş Pozisyonları Listelendi");
     }
 
-//    @Override
-//    public List<JobPosition> getAllJobPositions(int page, int size) {
-//        Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
-//        return jobPositionDao.findAll(pageable).getContent();
-//    }
-
     @Override
     public Result addIsPozisyonu(JobPosition jobPosition) {
          this.jobPositionDao.save(jobPosition);
         return new SuccessResult(true,"Is Pozisyonu Eklendi");
     }
+
+    @Override
+    public void save(JobPositionAddRequest jobPositionAddRequest) {
+
+        JobPosition jobPosition =  this.modelMapperService.forRequest().map(jobPositionAddRequest, JobPosition.class);
+        this.jobPositionDao.save(jobPosition);
+
+     }
 
     @Override
     public Page<JobPosition> getJobPositions(int page, int size) {
@@ -50,8 +55,5 @@ public class JobPositionManager implements JobPositionService {
         return new SuccessDataResult<>( this.jobPositionDao.findById(id),"İş Pozisyonu Listelendi");
     }
 
-   // @Override
-   // public DataResult<List<JobPosition>> findByJobTitleEndsWith(String isIsmi) {
-      //  return new SuccessDataResult<>( this.jobPositionDao.findByJobTitleEndsWith(isIsmi),"İş Pozisyonu adı Listelendi");
-    //}
+
 }

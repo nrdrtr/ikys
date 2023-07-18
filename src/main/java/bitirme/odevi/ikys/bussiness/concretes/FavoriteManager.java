@@ -1,10 +1,10 @@
 package bitirme.odevi.ikys.bussiness.concretes;
 
 import bitirme.odevi.ikys.bussiness.abstracts.FavoriteService;
-import bitirme.odevi.ikys.core.utilities.results.DataResult;
-import bitirme.odevi.ikys.core.utilities.results.Result;
-import bitirme.odevi.ikys.core.utilities.results.SuccessDataResult;
-import bitirme.odevi.ikys.core.utilities.results.SuccessResult;
+import bitirme.odevi.ikys.bussiness.requests.JobSeekerAddFavorite;
+import bitirme.odevi.ikys.bussiness.requests.JobSeekerRemoveFavorite;
+import bitirme.odevi.ikys.core.utilities.mapper.ModelMapperService;
+import bitirme.odevi.ikys.core.utilities.results.*;
 import bitirme.odevi.ikys.dataAccess.abstracts.FavoriteDao;
 import bitirme.odevi.ikys.entitites.concretes.Favorite;
 import lombok.AllArgsConstructor;
@@ -17,6 +17,7 @@ import java.util.List;
 public class FavoriteManager implements FavoriteService {
 
     private FavoriteDao favoriteDao;
+    private ModelMapperService modelMapperService;
 
     @Override
     public DataResult<List<Favorite>> getFavoriByIsArayanId(int id) {
@@ -26,13 +27,33 @@ public class FavoriteManager implements FavoriteService {
     @Override
     public Result save(Favorite favorite) {
         this.favoriteDao.save(favorite);
-        return new SuccessDataResult<>("favorite güncellendi");
+        return new SuccessDataResult<>("favorin ilanın eklendi");
     }
+
+    @Override
+    public Result addFavoriteAdvertisemement(JobSeekerAddFavorite jobSeekerAddFavorite) {
+        Favorite favorite = this.modelMapperService.forRequest().map(jobSeekerAddFavorite, Favorite.class);
+        this.favoriteDao.save(favorite);
+        return new SuccessResult("favori ilan eklendi");
+
+    }
+
 
     @Override
     public Result delete(int id) {
         this.favoriteDao.deleteById(id);
         return new SuccessResult("favori silindi");
+    }
+
+    @Override
+    public Result removeFavoriteAdvertisement(JobSeekerRemoveFavorite  jobSeekerRemoveFavorite) {
+         Favorite favorite = favoriteDao.findByJobSeekerIdAndJobAdvertisementId(
+                jobSeekerRemoveFavorite.getJobSeekerId(),
+                jobSeekerRemoveFavorite.getJobAdvertisementId()
+        );
+
+        favoriteDao.delete(favorite);
+        return new SuccessResult("ilan favorilerden kaldırıldı.");
     }
 
     @Override
